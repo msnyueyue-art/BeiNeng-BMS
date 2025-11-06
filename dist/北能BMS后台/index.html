@@ -830,6 +830,20 @@
                 this.parentElement.style.transform = 'translateY(0)';
             });
         });
+
+        // ===== 加载自定义Logo =====
+        function loadCustomLogo() {
+            const savedLogo = localStorage.getItem('customLogo');
+            if (savedLogo) {
+                const logoImg = document.querySelector('.logo-image');
+                if (logoImg) {
+                    logoImg.src = savedLogo;
+                }
+            }
+        }
+
+        // 页面加载时应用自定义logo
+        loadCustomLogo();
     </script>
 </body>
 </html>

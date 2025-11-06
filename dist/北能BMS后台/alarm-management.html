@@ -779,24 +779,6 @@
             gap: 8px;
         }
 
-        .processing-record {
-            background: var(--bg-gray);
-            border-radius: 6px;
-            padding: 16px;
-            margin-bottom: 12px;
-        }
-
-        .record-time {
-            font-size: 12px;
-            color: var(--text-gray);
-            margin-bottom: 8px;
-        }
-
-        .record-content {
-            font-size: 14px;
-            color: var(--text-dark);
-        }
-
         .modal-footer {
             padding: 16px 24px;
             border-top: 1px solid var(--border-color);
@@ -878,12 +860,29 @@
     <aside class="sidebar">
         <!-- 用户管理菜单组 -->
         <div class="menu-group">
-            <div class="menu-parent" onclick="window.location.href='user-management.html'">
+            <div class="menu-parent" onclick="toggleMenu(this)">
                 <div class="menu-parent-left">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                     </svg>
                     <span>用户管理</span>
+                </div>
+                <svg class="menu-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                </svg>
+            </div>
+            <div class="menu-children">
+                <div class="menu-child" onclick="window.location.href='user-management.html'">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                    <span>用户管理</span>
+                </div>
+                <div class="menu-child" onclick="window.location.href='distributor-management.html'">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 12 7.4l3.38 4.6L17 10.83 14.92 8H20v6z"/>
+                    </svg>
+                    <span>分销商管理</span>
                 </div>
             </div>
         </div>
@@ -930,12 +929,6 @@
                 </svg>
             </div>
             <div class="menu-children">
-                <div class="menu-child" onclick="window.location.href='menu-management.html'">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
-                    </svg>
-                    <span>菜单管理</span>
-                </div>
                 <div class="menu-child" onclick="window.location.href='role-management.html'">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
@@ -1143,12 +1136,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 处理记录 -->
-                <div class="info-section">
-                    <h3 class="section-title">处理记录</h3>
-                    <div id="processingRecords"></div>
-                </div>
             </div>
             <div class="modal-footer">
                 <button class="modal-btn" onclick="closeAlarmDetail()">取消</button>
@@ -1286,11 +1273,13 @@
                                     <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
                                 </svg>
                             </button>
-                            <button class="table-action-btn" title="解决" onclick="solveAlarm('${alarm.id}')" ${alarm.status === 'solved' ? 'disabled' : ''}>
+                            ${alarm.status === 'unsolved' ? `
+                            <button class="table-action-btn" title="解决" onclick="solveAlarm('${alarm.id}')">
                                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
                                 </svg>
                             </button>
+                            ` : ''}
                         </div>
                     </td>
                 `;
@@ -1438,15 +1427,6 @@
             const threshold = alarm.type === '电压异常' ? '3.6V' : alarm.type === '温度异常' ? '50°C' : '阈值';
             document.getElementById('detailCurrentValue').textContent = currentValue;
             document.getElementById('detailThreshold').textContent = threshold;
-
-            // 填充处理记录
-            const recordsHtml = `
-                <div class="processing-record">
-                    <div class="record-time">${alarm.alarmTime}</div>
-                    <div class="record-content">系统自动生成告警</div>
-                </div>
-            `;
-            document.getElementById('processingRecords').innerHTML = recordsHtml;
 
             // 显示弹框
             document.getElementById('alarmDetailModal').classList.add('show');

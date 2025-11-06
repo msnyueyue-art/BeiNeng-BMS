@@ -267,14 +267,19 @@
         }
 
         .menu-arrow {
-            width: 16px;
-            height: 16px;
-            fill: var(--text-gray);
+            width: 18px;
+            height: 18px;
+            fill: var(--text-dark);
             transition: transform 0.3s;
+            flex-shrink: 0;
+            opacity: 1 !important;
+            display: inline-block !important;
+            visibility: visible !important;
         }
 
         .menu-parent.expanded .menu-arrow {
             transform: rotate(90deg);
+            fill: var(--primary-blue);
         }
 
         .menu-children {
@@ -316,7 +321,7 @@
         }
 
         .menu-child.disabled {
-            opacity: 0.4;
+            opacity: 0.2;
             cursor: not-allowed;
             pointer-events: none;
             color: var(--text-light);
@@ -496,13 +501,13 @@
 
         .data-table th.sortable {
             position: relative;
-            padding-right: 28px;
+            padding-right: 18px;
         }
 
         .data-table th.sortable::after {
             content: '⇅';
             position: absolute;
-            right: 8px;
+            margin-left: 4px;
             color: var(--text-secondary);
             font-size: 12px;
         }
@@ -578,7 +583,7 @@
 
         .action-icon-btn:disabled {
             cursor: not-allowed;
-            opacity: 0.3;
+            opacity: 0.2;
             color: var(--text-secondary) !important;
             pointer-events: none;
         }
@@ -953,6 +958,166 @@
             font-weight: 600;
             color: var(--primary-blue);
         }
+
+        /* logo 设置弹框 */
+        .logo-setting-modal {
+            width: 400px;
+        }
+
+        .logo-upload-container {
+            text-align: center;
+        }
+
+        .logo-upload-hint {
+            font-size: 14px;
+            color: var(--text-gray);
+            margin-bottom: 16px;
+        }
+
+        .logo-upload-area {
+            width: 200px;
+            height: 80px;
+            margin: 0 auto 16px;
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-gray);
+        }
+
+        .logo-upload-area:hover {
+            border-color: var(--primary-blue);
+            background: var(--light-blue);
+        }
+
+        .logo-upload-area.has-image {
+            border-style: solid;
+        }
+
+        .logo-upload-area.error {
+            border-color: var(--error-red);
+            background: #FEF0F0;
+        }
+
+        .logo-upload-placeholder {
+            color: var(--text-light);
+            font-size: 14px;
+            text-align: center;
+            padding: 0 16px;
+        }
+
+        .logo-preview-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: none;
+        }
+
+        .logo-preview-image.show {
+            display: block;
+        }
+
+        .logo-select-btn {
+            padding: 8px 24px;
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 8px;
+        }
+
+        .logo-select-btn:hover {
+            background: var(--bg-gray);
+            border-color: var(--primary-blue);
+        }
+
+        .logo-upload-note {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 8px;
+        }
+
+        .logo-upload-status {
+            margin-top: 12px;
+            font-size: 13px;
+            display: none;
+        }
+
+        .logo-upload-status.success {
+            color: var(--success-green);
+            display: block;
+        }
+
+        .logo-upload-status.error {
+            color: var(--error-red);
+            display: block;
+        }
+
+        .logo-upload-status svg {
+            width: 16px;
+            height: 16px;
+            vertical-align: middle;
+            margin-right: 4px;
+            fill: currentColor;
+        }
+
+        /* 设备列表弹框样式 */
+        .device-list-modal {
+            width: 700px;
+            max-width: 90%;
+        }
+
+        .device-list-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+
+        .device-list-table thead {
+            background: var(--bg-gray);
+        }
+
+        .device-list-table th {
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--text-gray);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .device-list-table td {
+            padding: 16px;
+            font-size: 14px;
+            color: var(--text-dark);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .device-list-table tbody tr:hover {
+            background-color: var(--bg-gray);
+        }
+
+        .device-view-btn {
+            padding: 6px 16px;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .device-view-btn:hover {
+            background: var(--hover-blue);
+        }
     </style>
 </head>
 <body>
@@ -993,11 +1158,11 @@
                     <path d="M7 10l5 5 5-5z"/>
                 </svg>
                 <div class="user-dropdown">
-                    <div class="dropdown-item">
+                    <div class="dropdown-item" onclick="openLogoSettingModal()">
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                            <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5 17l3.5-4.5 2.5 3.01L14.5 11l4.5 6H5z"/>
                         </svg>
-                        账号设置
+                        logo 设置
                     </div>
                     <div class="dropdown-item" onclick="logout()">
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1014,12 +1179,29 @@
     <aside class="sidebar">
         <!-- 用户管理菜单组 -->
         <div class="menu-group">
-            <div class="menu-parent active" onclick="window.location.href='user-management.html'">
+            <div class="menu-parent expanded active" onclick="toggleMenu(this)">
                 <div class="menu-parent-left">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                     </svg>
                     <span>用户管理</span>
+                </div>
+                <svg class="menu-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                </svg>
+            </div>
+            <div class="menu-children show">
+                <div class="menu-child active" onclick="window.location.href='user-management.html'">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                    <span>用户管理</span>
+                </div>
+                <div class="menu-child disabled">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 12 7.4l3.38 4.6L17 10.83 14.92 8H20v6z"/>
+                    </svg>
+                    <span>分销商管理</span>
                 </div>
             </div>
         </div>
@@ -1068,12 +1250,6 @@
             <div class="menu-children">
                 <div class="menu-child disabled">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
-                    </svg>
-                    <span>菜单管理</span>
-                </div>
-                <div class="menu-child disabled">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
                     </svg>
                     <span>角色管理</span>
@@ -1111,14 +1287,6 @@
                     <label class="filter-label">用户名</label>
                     <input type="text" class="filter-input" id="usernameFilter" placeholder="请输入用户名">
                 </div>
-                <div class="filter-item">
-                    <label class="filter-label">状态</label>
-                    <select class="filter-select" id="statusFilter">
-                        <option value="">全部</option>
-                        <option value="enabled">启用</option>
-                        <option value="disabled">禁用</option>
-                    </select>
-                </div>
                 <button class="filter-btn primary" onclick="applyFilters()">
                     <span>查询</span>
                 </button>
@@ -1127,17 +1295,6 @@
                 </button>
             </div>
 
-            <!-- 操作区域 -->
-            <div class="action-section">
-                <div class="action-left">
-                    <button class="action-btn primary" onclick="openAddModal()">
-                        <svg viewBox="0 0 24 24" style="width: 16px; height: 16px; fill: currentColor;">
-                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-                        </svg>
-                        <span>添加</span>
-                    </button>
-                </div>
-            </div>
 
             <!-- 数据表格 -->
             <table class="data-table">
@@ -1147,10 +1304,8 @@
                         <th>用户名</th>
                         <th>E-mail</th>
                         <th>手机号</th>
-                        <th>最后登录IP</th>
                         <th class="sortable" onclick="sortTable('loginTime')">最后登录时间</th>
                         <th class="sortable" onclick="sortTable('createTime')">创建时间</th>
-                        <th>状态</th>
                         <th>操作</th>
                     </tr>
                 </thead>
@@ -1187,16 +1342,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">头像</label>
-                        <div class="avatar-upload">
-                            <div class="upload-area" onclick="selectAvatar()">
-                                <div class="plus-icon">+</div>
-                            </div>
-                            <button type="button" class="upload-btn" onclick="selectAvatar()">选择</button>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
                         <label class="form-label"><span class="required">*</span>电子邮箱</label>
                         <input type="email" class="form-input" id="add_email" placeholder="请输入电子邮箱" required>
                     </div>
@@ -1206,52 +1351,9 @@
                         <input type="tel" class="form-input" id="add_phone" placeholder="请输入手机号">
                     </div>
 
-                    <!-- 扩展信息区 -->
-                    <div class="form-group">
-                        <label class="form-label">性别</label>
-                        <div class="radio-group">
-                            <div class="radio-item">
-                                <input type="radio" id="add_gender_unknown" name="add_gender" value="unknown" checked>
-                                <label for="add_gender_unknown">未知</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" id="add_gender_male" name="add_gender" value="male">
-                                <label for="add_gender_male">男</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" id="add_gender_female" name="add_gender" value="female">
-                                <label for="add_gender_female">女</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">生日</label>
-                        <input type="date" class="form-input" id="add_birthday" placeholder="请选择生日">
-                    </div>
-
                     <div class="form-group">
                         <label class="form-label"><span class="required">*</span>密码</label>
-                        <input type="password" class="form-input" id="add_password" placeholder="请输入密码" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">个性签名</label>
-                        <textarea class="form-textarea" id="add_signature" placeholder="请输入个性签名"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">状态</label>
-                        <div class="radio-group">
-                            <div class="radio-item">
-                                <input type="radio" id="add_status_enabled" name="add_status" value="enabled" checked>
-                                <label for="add_status_enabled">启用</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" id="add_status_disabled" name="add_status" value="disabled">
-                                <label for="add_status_disabled">禁用</label>
-                            </div>
-                        </div>
+                        <input type="password" class="form-input" id="add_password" placeholder="请输入登录账号密码" required>
                     </div>
                 </form>
             </div>
@@ -1280,20 +1382,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">头像</label>
-                        <div class="avatar-upload">
-                            <div class="avatar-preview">
-                                <div class="avatar-current" id="edit_avatar_preview">👤</div>
-                                <div class="avatar-check">✓</div>
-                            </div>
-                            <div class="upload-area" onclick="selectAvatar()">
-                                <div class="plus-icon">+</div>
-                            </div>
-                            <button type="button" class="upload-btn" onclick="selectAvatar()">选择</button>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
                         <label class="form-label"><span class="required">*</span>电子邮箱</label>
                         <input type="email" class="form-input" id="edit_email" placeholder="请输入电子邮箱" required>
                     </div>
@@ -1303,68 +1391,9 @@
                         <input type="tel" class="form-input" id="edit_phone" placeholder="请输入手机号">
                     </div>
 
-                    <!-- 扩展信息区 -->
-                    <div class="form-group">
-                        <label class="form-label">性别</label>
-                        <div class="radio-group">
-                            <div class="radio-item">
-                                <input type="radio" id="edit_gender_unknown" name="edit_gender" value="unknown">
-                                <label for="edit_gender_unknown">未知</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" id="edit_gender_male" name="edit_gender" value="male">
-                                <label for="edit_gender_male">男</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" id="edit_gender_female" name="edit_gender" value="female">
-                                <label for="edit_gender_female">女</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">生日</label>
-                        <input type="date" class="form-input" id="edit_birthday" placeholder="请选择生日">
-                    </div>
-
                     <div class="form-group">
                         <label class="form-label"><span class="required">*</span>密码</label>
-                        <input type="password" class="form-input" id="edit_password" placeholder="请输入密码" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">个性签名</label>
-                        <textarea class="form-textarea" id="edit_signature" placeholder="请输入个性签名"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">状态</label>
-                        <div class="radio-group">
-                            <div class="radio-item">
-                                <input type="radio" id="edit_status_enabled" name="edit_status" value="enabled">
-                                <label for="edit_status_enabled">启用</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" id="edit_status_disabled" name="edit_status" value="disabled">
-                                <label for="edit_status_disabled">禁用</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">余额</label>
-                        <div class="balance-row">
-                            <input type="number" class="form-input balance-input" id="edit_balance" value="0.00" step="0.01" readonly>
-                            <button type="button" class="adjust-btn" onclick="adjustBalance()">调整金额</button>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">积分</label>
-                        <div class="balance-row">
-                            <input type="number" class="form-input balance-input" id="edit_points" value="0" readonly>
-                            <button type="button" class="adjust-btn" onclick="adjustPoints()">调整积分</button>
-                        </div>
+                        <input type="password" class="form-input" id="edit_password" placeholder="*******" required disabled style="background: var(--bg-gray); color: var(--text-light); cursor: not-allowed; opacity: 0.6;">
                     </div>
                 </form>
             </div>
@@ -1401,19 +1430,92 @@
         </div>
     </div>
 
+    <!-- logo 设置弹框 -->
+    <div class="modal-overlay" id="logoSettingModal">
+        <div class="modal logo-setting-modal">
+            <div class="modal-header">
+                <h3 class="modal-title">logo 设置</h3>
+                <button class="modal-close" onclick="closeLogoSettingModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="logo-upload-container">
+                    <div class="logo-upload-hint">上传 logo 图片</div>
+
+                    <div class="logo-upload-area" id="logoUploadArea" onclick="selectLogoImage()">
+                        <div class="logo-upload-placeholder" id="logoPlaceholder">
+                            点击或拖拽图片至此处
+                        </div>
+                        <img id="logoPreviewImage" class="logo-preview-image" alt="logo预览" />
+                    </div>
+
+                    <button type="button" class="logo-select-btn" onclick="selectLogoImage()">选择图片</button>
+
+                    <div class="logo-upload-note">
+                        支持格式:PNG/JPG,建议尺寸不超过 500×200px
+                    </div>
+
+                    <div class="logo-upload-status" id="logoUploadStatus">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <span id="logoStatusText"></span>
+                    </div>
+
+                    <input type="file" id="logoFileInput" accept="image/png,image/jpeg,image/jpg" style="display: none;" onchange="handleLogoFileSelect(event)" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn default" onclick="closeLogoSettingModal()">取消</button>
+                <button class="modal-btn primary" id="logoConfirmBtn" onclick="confirmLogoChange()" disabled>确认</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 设备列表弹框 -->
+    <div class="modal-overlay" id="deviceListModal">
+        <div class="modal device-list-modal">
+            <div class="modal-header">
+                <h3 class="modal-title">设备列表 - <span id="deviceListUsername"></span></h3>
+                <button class="modal-close" onclick="closeDeviceListModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="device-list-table">
+                    <thead>
+                        <tr>
+                            <th>设备ID</th>
+                            <th>设备名称</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="deviceListTableBody">
+                        <!-- 动态渲染设备列表 -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn default" onclick="closeDeviceListModal()">关闭</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // 模拟数据 - 添加deviceId字段用于关联设备
+        // 模拟数据 - 添加devices数组用于关联多个设备
         let mockUsers = [
             {
                 id: 1001,
                 username: 'Supertron',
-                deviceId: 'BMS001', // 关联的设备ID
+                devices: [ // 关联的设备列表
+                    { id: 'BMS001', name: 'BMS-A区-01' },
+                    { id: 'BMS002', name: 'BMS-A区-02' },
+                    { id: 'BMS003', name: 'BMS-B区-01' }
+                ],
                 email: 'supertron@example.com',
                 phone: '13800138000',
+                distributorId: 'FXS001',
+                distributorName: '北京鸿运',
                 lastLoginIp: '192.168.1.100',
                 lastLoginTime: '2025-01-15 14:30:25',
                 createTime: '2024-01-10 09:00:00',
-                status: 'enabled',
                 gender: 'male',
                 birthday: '1990-05-15',
                 signature: '专注于技术创新',
@@ -1423,13 +1525,17 @@
             {
                 id: 1002,
                 username: 'admin',
-                deviceId: 'BMS002', // 关联的设备ID
+                devices: [
+                    { id: 'BMS004', name: 'BMS-C区-01' },
+                    { id: 'BMS005', name: 'BMS-C区-02' }
+                ],
                 email: 'admin@example.com',
                 phone: '13900139000',
+                distributorId: 'FXS002',
+                distributorName: '上海腾达',
                 lastLoginIp: '192.168.1.101',
                 lastLoginTime: '2025-01-20 10:15:30',
                 createTime: '2024-02-05 10:30:00',
-                status: 'enabled',
                 gender: 'unknown',
                 birthday: '',
                 signature: '系统管理员',
@@ -1439,13 +1545,16 @@
             {
                 id: 1003,
                 username: 'zhangsan',
-                deviceId: 'BMS003', // 关联的设备ID
+                devices: [
+                    { id: 'BMS006', name: 'BMS-D区-01' }
+                ],
                 email: 'zhangsan@example.com',
                 phone: '13700137000',
+                distributorId: 'FXS003',
+                distributorName: '深圳华强北',
                 lastLoginIp: '192.168.1.102',
                 lastLoginTime: '2025-01-18 16:45:10',
                 createTime: '2024-03-12 14:20:00',
-                status: 'enabled',
                 gender: 'male',
                 birthday: '1995-08-20',
                 signature: '',
@@ -1455,13 +1564,19 @@
             {
                 id: 1004,
                 username: 'lisi',
-                deviceId: 'BMS004', // 关联的设备ID
+                devices: [
+                    { id: 'BMS007', name: 'BMS-E区-01' },
+                    { id: 'BMS008', name: 'BMS-E区-02' },
+                    { id: 'BMS009', name: 'BMS-E区-03' },
+                    { id: 'BMS010', name: 'BMS-E区-04' }
+                ],
                 email: 'lisi@example.com',
                 phone: '13600136000',
+                distributorId: 'FXS004',
+                distributorName: '杭州西湖',
                 lastLoginIp: '192.168.1.103',
                 lastLoginTime: '2025-01-12 09:20:15',
                 createTime: '2024-04-08 11:00:00',
-                status: 'disabled',
                 gender: 'female',
                 birthday: '1992-03-10',
                 signature: '热爱生活',
@@ -1471,13 +1586,17 @@
             {
                 id: 1005,
                 username: 'wangwu',
-                deviceId: 'BMS005', // 关联的设备ID
+                devices: [
+                    { id: 'BMS011', name: 'BMS-F区-01' },
+                    { id: 'BMS012', name: 'BMS-F区-02' }
+                ],
                 email: 'wangwu@example.com',
                 phone: '13500135000',
+                distributorId: 'FXS005',
+                distributorName: '南京江宁',
                 lastLoginIp: '192.168.1.104',
                 lastLoginTime: '2025-01-22 08:10:40',
                 createTime: '2024-05-20 15:30:00',
-                status: 'enabled',
                 gender: 'male',
                 birthday: '1988-12-05',
                 signature: '',
@@ -1503,28 +1622,12 @@
                     <td>${user.username}</td>
                     <td>${user.email}</td>
                     <td>${user.phone}</td>
-                    <td>${user.lastLoginIp}</td>
                     <td>${user.lastLoginTime}</td>
                     <td>${user.createTime}</td>
                     <td>
-                        <span class="status-badge ${user.status}">
-                            ${user.status === 'enabled' ? '启用' : '禁用'}
-                        </span>
-                    </td>
-                    <td>
-                        <button class="action-icon-btn" onclick="goToDeviceDetail('${user.username}')" title="查看设备详情" disabled>
+                        <button class="action-icon-btn" onclick="goToDeviceDetail('${user.username}')" title="查看设备详情">
                             <svg viewBox="0 0 24 24">
                                 <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-                            </svg>
-                        </button>
-                        <button class="action-icon-btn" onclick="openEditModal(${user.id})" title="编辑">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
-                            </svg>
-                        </button>
-                        <button class="action-icon-btn delete" onclick="openDeleteModal(${user.id})" title="删除">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
                             </svg>
                         </button>
                     </td>
@@ -1537,6 +1640,18 @@
             const isExpanded = element.classList.contains('expanded');
             const children = element.nextElementSibling;
 
+            // 先关闭所有其他菜单
+            document.querySelectorAll('.menu-parent').forEach(parent => {
+                if (parent !== element) {
+                    parent.classList.remove('expanded');
+                    const otherChildren = parent.nextElementSibling;
+                    if (otherChildren && otherChildren.classList.contains('menu-children')) {
+                        otherChildren.classList.remove('show');
+                    }
+                }
+            });
+
+            // 切换当前菜单
             if (isExpanded) {
                 element.classList.remove('expanded');
                 children.classList.remove('show');
@@ -1550,15 +1665,13 @@
         function applyFilters() {
             const userId = document.getElementById('userIdFilter').value;
             const username = document.getElementById('usernameFilter').value;
-            const status = document.getElementById('statusFilter').value;
-            console.log('应用筛选:', { userId, username, status });
-            alert('筛选功能：用户ID "' + userId + '" | 用户名 "' + username + '" | 状态 "' + status + '"');
+            console.log('应用筛选:', { userId, username });
+            alert('筛选功能：用户ID "' + userId + '" | 用户名 "' + username + '"');
         }
 
         function resetFilters() {
             document.getElementById('userIdFilter').value = '';
             document.getElementById('usernameFilter').value = '';
-            document.getElementById('statusFilter').value = '';
             renderUserList();
         }
 
@@ -1631,13 +1744,7 @@
                     minute: '2-digit',
                     second: '2-digit',
                     hour12: false
-                }).replace(/\//g, '-'),
-                status: document.querySelector('input[name="add_status"]:checked').value,
-                gender: document.querySelector('input[name="add_gender"]:checked').value,
-                birthday: document.getElementById('add_birthday').value,
-                signature: document.getElementById('add_signature').value,
-                balance: 0.00,
-                points: 0
+                }).replace(/\//g, '-')
             };
 
             mockUsers.unshift(newUser);
@@ -1655,16 +1762,6 @@
             document.getElementById('edit_username').value = user.username;
             document.getElementById('edit_email').value = user.email;
             document.getElementById('edit_phone').value = user.phone;
-            document.getElementById('edit_birthday').value = user.birthday;
-            document.getElementById('edit_signature').value = user.signature;
-            document.getElementById('edit_balance').value = user.balance.toFixed(2);
-            document.getElementById('edit_points').value = user.points;
-
-            // 设置性别单选按钮
-            document.getElementById('edit_gender_' + user.gender).checked = true;
-
-            // 设置状态单选按钮
-            document.getElementById('edit_status_' + user.status).checked = true;
 
             document.getElementById('editModal').classList.add('active');
         }
@@ -1692,13 +1789,7 @@
                     ...mockUsers[userIndex],
                     username: username,
                     email: email,
-                    phone: phone,
-                    gender: document.querySelector('input[name="edit_gender"]:checked').value,
-                    birthday: document.getElementById('edit_birthday').value,
-                    signature: document.getElementById('edit_signature').value,
-                    status: document.querySelector('input[name="edit_status"]:checked').value,
-                    balance: parseFloat(document.getElementById('edit_balance').value),
-                    points: parseInt(document.getElementById('edit_points').value)
+                    phone: phone
                 };
 
                 renderUserList();
@@ -1741,10 +1832,44 @@
             alert('选择头像功能 - 实际项目中会打开文件选择器');
         }
 
-        // 跳转到设备详情
+        // 打开设备列表弹框
         function goToDeviceDetail(username) {
-            // 将用户名作为查询参数传递到设备管理页面,用于打开对应的设备详情弹框
-            window.location.href = `device-management.html?user=${encodeURIComponent(username)}&openDetail=true`;
+            const user = mockUsers.find(u => u.username === username);
+            if (!user || !user.devices || user.devices.length === 0) {
+                alert('该用户没有绑定设备');
+                return;
+            }
+
+            // 设置弹框标题
+            document.getElementById('deviceListUsername').textContent = username;
+
+            // 渲染设备列表
+            const tbody = document.getElementById('deviceListTableBody');
+            tbody.innerHTML = user.devices.map(device => `
+                <tr>
+                    <td>${device.id}</td>
+                    <td>${device.name}</td>
+                    <td>
+                        <button class="device-view-btn" onclick="viewDeviceMonitor('${device.id}')">
+                            查看
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+
+            // 打开弹框
+            document.getElementById('deviceListModal').classList.add('active');
+        }
+
+        // 关闭设备列表弹框
+        function closeDeviceListModal() {
+            document.getElementById('deviceListModal').classList.remove('active');
+        }
+
+        // 跳转到设备管理页面并打开对应设备的监控管理弹框
+        function viewDeviceMonitor(deviceId) {
+            // 跳转到设备管理页面,并传递设备ID参数以打开监控弹框
+            window.location.href = `device-management.html?deviceId=${encodeURIComponent(deviceId)}&openMonitor=true`;
         }
 
         // 调整余额
@@ -1823,9 +1948,214 @@
             }
         }
 
+        // ===== logo 设置相关功能 =====
+        let selectedLogoFile = null;
+        let selectedLogoDataURL = null;
+
+        // 打开 logo 设置弹框
+        function openLogoSettingModal() {
+            const modal = document.getElementById('logoSettingModal');
+            modal.classList.add('active');
+
+            // 加载已保存的 logo
+            const savedLogo = localStorage.getItem('customLogo');
+            if (savedLogo) {
+                showLogoPreview(savedLogo);
+                enableConfirmButton();
+            } else {
+                resetLogoUpload();
+            }
+        }
+
+        // 关闭 logo 设置弹框
+        function closeLogoSettingModal() {
+            document.getElementById('logoSettingModal').classList.remove('active');
+            resetLogoUpload();
+        }
+
+        // 重置上传状态
+        function resetLogoUpload() {
+            selectedLogoFile = null;
+            selectedLogoDataURL = null;
+
+            const uploadArea = document.getElementById('logoUploadArea');
+            const placeholder = document.getElementById('logoPlaceholder');
+            const previewImage = document.getElementById('logoPreviewImage');
+            const status = document.getElementById('logoUploadStatus');
+            const confirmBtn = document.getElementById('logoConfirmBtn');
+
+            uploadArea.classList.remove('has-image', 'error');
+            placeholder.style.display = 'block';
+            previewImage.classList.remove('show');
+            status.className = 'logo-upload-status';
+            confirmBtn.disabled = true;
+        }
+
+        // 选择 logo 图片
+        function selectLogoImage() {
+            document.getElementById('logoFileInput').click();
+        }
+
+        // 处理文件选择
+        function handleLogoFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            // 验证文件类型
+            if (!['image/png', 'image/jpeg', 'image/jpg'].includes(file.type)) {
+                showLogoError('请上传 PNG/JPG 格式的图片');
+                return;
+            }
+
+            // 验证文件大小(最大2MB)
+            if (file.size > 2 * 1024 * 1024) {
+                showLogoError('图片大小不能超过 2MB');
+                return;
+            }
+
+            // 读取图片并验证尺寸
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    // 验证尺寸
+                    if (img.width > 500 || img.height > 200) {
+                        showLogoError('图片尺寸不能超过 500×200px');
+                        return;
+                    }
+
+                    // 验证通过,保存文件
+                    selectedLogoFile = file;
+                    selectedLogoDataURL = e.target.result;
+                    showLogoPreview(e.target.result);
+                    showLogoSuccess('✓ 上传成功');
+                    enableConfirmButton();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // 显示 logo 预览
+        function showLogoPreview(dataURL) {
+            const uploadArea = document.getElementById('logoUploadArea');
+            const placeholder = document.getElementById('logoPlaceholder');
+            const previewImage = document.getElementById('logoPreviewImage');
+
+            uploadArea.classList.add('has-image');
+            uploadArea.classList.remove('error');
+            placeholder.style.display = 'none';
+            previewImage.src = dataURL;
+            previewImage.classList.add('show');
+        }
+
+        // 显示错误信息
+        function showLogoError(message) {
+            const uploadArea = document.getElementById('logoUploadArea');
+            const status = document.getElementById('logoUploadStatus');
+            const statusText = document.getElementById('logoStatusText');
+
+            uploadArea.classList.add('error');
+            status.className = 'logo-upload-status error';
+            statusText.textContent = message;
+
+            // 清除状态
+            resetLogoUpload();
+        }
+
+        // 显示成功信息
+        function showLogoSuccess(message) {
+            const status = document.getElementById('logoUploadStatus');
+            const statusText = document.getElementById('logoStatusText');
+
+            status.className = 'logo-upload-status success';
+            statusText.textContent = message;
+        }
+
+        // 启用确认按钮
+        function enableConfirmButton() {
+            document.getElementById('logoConfirmBtn').disabled = false;
+        }
+
+        // 确认 logo 更换
+        function confirmLogoChange() {
+            if (!selectedLogoDataURL) {
+                alert('请先选择图片');
+                return;
+            }
+
+            // 保存到 localStorage
+            localStorage.setItem('customLogo', selectedLogoDataURL);
+
+            // 更新系统左上角 logo
+            updateSystemLogo(selectedLogoDataURL);
+
+            // 关闭弹框
+            closeLogoSettingModal();
+
+            alert('logo 设置成功!');
+        }
+
+        // 更新系统 logo
+        function updateSystemLogo(logoDataURL) {
+            // 更新当前页面的 logo
+            const brandLogoImg = document.querySelector('.brand-logo img');
+            if (brandLogoImg) {
+                brandLogoImg.src = logoDataURL;
+            }
+
+            // 更新登录页的 logo (通过修改 localStorage,登录页会读取)
+            // 登录页需要添加相应的读取逻辑
+        }
+
+        // 拖拽上传功能
+        const logoUploadArea = document.getElementById('logoUploadArea');
+        if (logoUploadArea) {
+            // 阻止默认拖拽行为
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                logoUploadArea.addEventListener(eventName, preventDefaults, false);
+            });
+
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            // 拖拽时高亮
+            ['dragenter', 'dragover'].forEach(eventName => {
+                logoUploadArea.addEventListener(eventName, () => {
+                    logoUploadArea.style.borderColor = 'var(--primary-blue)';
+                    logoUploadArea.style.background = 'var(--light-blue)';
+                }, false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                logoUploadArea.addEventListener(eventName, () => {
+                    logoUploadArea.style.borderColor = '';
+                    logoUploadArea.style.background = '';
+                }, false);
+            });
+
+            // 处理拖拽文件
+            logoUploadArea.addEventListener('drop', function(e) {
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    const fileInput = document.getElementById('logoFileInput');
+                    fileInput.files = files;
+                    handleLogoFileSelect({ target: fileInput });
+                }
+            }, false);
+        }
+
         // 页面加载时渲染列表
         document.addEventListener('DOMContentLoaded', function() {
             renderUserList();
+
+            // 加载自定义 logo
+            const savedLogo = localStorage.getItem('customLogo');
+            if (savedLogo) {
+                updateSystemLogo(savedLogo);
+            }
         });
     </script>
 </body>

@@ -1145,6 +1145,96 @@
             fill: var(--error-red);
         }
 
+        .file-remove-btn {
+            width: 28px;
+            height: 28px;
+            border: none;
+            background: transparent;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .file-remove-btn:hover {
+            background: rgba(245, 34, 45, 0.1);
+        }
+
+        .file-remove-btn svg {
+            fill: var(--error-red);
+        }
+
+        /* ===== Logo设置弹框样式 ===== */
+        .logo-upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 24px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--bg-gray);
+            margin-bottom: 12px;
+        }
+
+        .logo-upload-area:hover {
+            border-color: var(--primary-blue);
+            background: var(--light-blue);
+        }
+
+        .logo-upload-area.dragover {
+            border-color: var(--primary-blue);
+            background: var(--light-blue);
+        }
+
+        .logo-upload-area.has-image {
+            padding: 16px;
+            background: #F7F9FC;
+        }
+
+        .logo-upload-area.error {
+            border-color: var(--error-red);
+            background: rgba(245, 34, 45, 0.05);
+        }
+
+        .logo-upload-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-upload-btn {
+            padding: 8px 20px;
+            background: #E8ECEF;
+            border: 1px solid #C5CEE0;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #2C3E50;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .logo-upload-btn:hover {
+            background: #D8DDE3;
+            border-color: #B0BCCB;
+        }
+
+        .logo-upload-error {
+            color: var(--error-red);
+            font-size: 12px;
+            margin-top: 8px;
+            padding: 8px 12px;
+            background: rgba(245, 34, 45, 0.1);
+            border-radius: 4px;
+        }
+
         .modal-footer {
             padding: 16px 24px;
             border-top: 1px solid var(--border-color);
@@ -2466,11 +2556,11 @@
                     <path d="M7 10l5 5 5-5z"/>
                 </svg>
                 <div class="user-dropdown">
-                    <div class="dropdown-item">
+                    <div class="dropdown-item" onclick="openLogoSettingModal()">
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                            <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5 17l3.5-4.5 2.5 3.01L14.5 11l4.5 6H5z"/>
                         </svg>
-                        账号设置
+                        logo 设置
                     </div>
                     <div class="dropdown-item" onclick="logout()">
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -2487,12 +2577,29 @@
     <aside class="sidebar">
         <!-- 用户管理菜单组 -->
         <div class="menu-group">
-            <div class="menu-parent" onclick="window.location.href='user-management.html'">
+            <div class="menu-parent" onclick="toggleMenu(this)">
                 <div class="menu-parent-left">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                     </svg>
                     <span>用户管理</span>
+                </div>
+                <svg class="menu-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                </svg>
+            </div>
+            <div class="menu-children">
+                <div class="menu-child" onclick="window.location.href='user-management.html'">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                    <span>用户管理</span>
+                </div>
+                <div class="menu-child" onclick="window.location.href='distributor-management.html'">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 12 7.4l3.38 4.6L17 10.83 14.92 8H20v6z"/>
+                    </svg>
+                    <span>分销商管理</span>
                 </div>
             </div>
         </div>
@@ -2539,12 +2646,6 @@
                 </svg>
             </div>
             <div class="menu-children">
-                <div class="menu-child" onclick="window.location.href='menu-management.html'">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
-                    </svg>
-                    <span>菜单管理</span>
-                </div>
                 <div class="menu-child" onclick="window.location.href='role-management.html'">
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
@@ -2616,12 +2717,6 @@
             <!-- 操作按钮区 -->
             <div class="action-bar">
                 <div class="action-buttons">
-                    <button class="action-btn primary" onclick="addDevice()">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-                        </svg>
-                        添加设备
-                    </button>
                     <button class="action-btn success" onclick="otaUpgrade()">
                         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5 4v2h14V4H5zm0 10h4v6h6v-6h4l-7-7-7 7z"/>
@@ -2758,6 +2853,105 @@
             <div class="modal-footer">
                 <button class="modal-btn cancel" onclick="closeDeleteConfirmModal()">取消</button>
                 <button class="modal-btn danger" onclick="confirmDelete()">删除</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 固件升级弹框 ===== -->
+    <div class="modal-overlay" id="firmwareUpgradeModal">
+        <div class="modal-container" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 class="modal-title" id="firmwareUpgradeTitle">BMS001 - 升级固件</h3>
+                <button class="modal-close" onclick="closeFirmwareUpgradeModal()">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">设备 Id</label>
+                    <input type="text" class="form-input" id="firmwareDeviceId" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">名称</label>
+                    <input type="text" class="form-input" id="firmwareDeviceName" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">选择固件</label>
+                    <div class="file-upload-area" id="firmwareUploadArea" onclick="document.getElementById('firmwareFileInput').click()">
+                        <svg class="file-upload-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/>
+                        </svg>
+                        <div class="file-upload-text">拖文件到这里 或者 <span style="color: #1E6BFF;">点击上传</span></div>
+                        <div class="file-upload-hint">bin文件且文件大小不超过 500kb</div>
+                    </div>
+                    <input type="file" id="firmwareFileInput" accept=".bin" style="display: none;" onchange="handleFirmwareFileSelect(event)">
+                    <div id="firmwareFileInfo" class="file-info" style="display: none;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#1E6BFF">
+                            <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                        </svg>
+                        <div style="flex: 1;">
+                            <div id="firmwareFileName" style="font-size: 14px; color: #2C3E50; font-weight: 500;"></div>
+                            <div id="firmwareFileSize" style="font-size: 12px; color: #7F8C9A; margin-top: 4px;"></div>
+                        </div>
+                        <button type="button" class="file-remove-btn" onclick="removeFirmwareFile()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn cancel" onclick="closeFirmwareUpgradeModal()">取消</button>
+                <button class="modal-btn primary" onclick="submitFirmwareUpgrade()">升级固件</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== Logo设置弹框 ===== -->
+    <div class="modal-overlay" id="logoSettingModal">
+        <div class="modal-container" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3 class="modal-title">logo 设置</h3>
+                <button class="modal-close" onclick="closeLogoSettingModal()">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 24px;">
+                <div style="text-align: center; margin-bottom: 16px;">
+                    <div style="font-size: 14px; color: #7F8C9A; margin-bottom: 16px;">上传 logo 图片</div>
+
+                    <!-- 上传区域 -->
+                    <div class="logo-upload-area" id="logoUploadArea" onclick="document.getElementById('logoFileInput').click()">
+                        <div class="logo-upload-placeholder" id="logoUploadPlaceholder">
+                            <svg style="width: 48px; height: 48px; fill: #C5CEE0; margin-bottom: 8px;" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM5 17l3.5-4.5 2.5 3.01L14.5 11l4.5 6H5z"/>
+                            </svg>
+                            <div style="font-size: 14px; color: #5A6C7D;">点击或拖拽图片至此处</div>
+                        </div>
+                        <img id="logoPreviewImage" style="display: none; max-width: 100%; max-height: 80px; object-fit: contain;">
+                    </div>
+
+                    <input type="file" id="logoFileInput" accept="image/png,image/jpeg,image/jpg" style="display: none;" onchange="handleLogoFileSelect(event)">
+
+                    <button type="button" class="logo-upload-btn" onclick="document.getElementById('logoFileInput').click()">
+                        选择图片
+                    </button>
+
+                    <div id="logoUploadError" class="logo-upload-error" style="display: none;"></div>
+
+                    <div style="font-size: 12px; color: #7F8C9A; margin-top: 12px;">
+                        支持格式为 PNG/JPG，建议尺寸不超过 500×200px
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn cancel" onclick="closeLogoSettingModal()">取消</button>
+                <button class="modal-btn primary" id="logoConfirmBtn" onclick="submitLogoSetting()" disabled>确认</button>
             </div>
         </div>
     </div>
@@ -2945,7 +3139,7 @@
                                     </svg>
                                 </div>
                                 <div class="parallel-status-content">
-                                    <div class="parallel-status-value">2 在线数 >></div>
+                                    <div class="parallel-status-value">2</div>
                                     <div class="parallel-status-label">在线数量</div>
                                 </div>
                             </div>
@@ -3335,7 +3529,6 @@
                         <button class="protection-header-btn" onclick="importProtectionParams('level1')">导入参数</button>
                         <button class="protection-header-btn" onclick="exportProtectionParams('level1')">导出参数</button>
                         <button class="protection-header-btn" onclick="readAllProtectionParams('level1')">读取全部</button>
-                        <button class="protection-header-btn" onclick="writeAllProtectionParams('level1')">写入全部</button>
                         <button class="protection-header-btn" onclick="setDefaultProtectionParams('level1')">设置默认参数</button>
                     </div>
 
@@ -3344,7 +3537,7 @@
                         <button class="protection-header-btn" onclick="importProtectionParams('level2')">导入参数</button>
                         <button class="protection-header-btn" onclick="exportProtectionParams('level2')">导出参数</button>
                         <button class="protection-header-btn" onclick="readAllProtectionParams('level2')">读取全部</button>
-                        <button class="protection-header-btn" onclick="writeAllProtectionParams('level2')">写入全部</button>
+                        <button class="protection-header-btn" onclick="setDefaultProtectionParams('level2')">设置默认参数</button>
                     </div>
                 </div>
 
@@ -3517,11 +3710,11 @@
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">高温保护 (℃)</label>
-                                <input type="number" class="protection-param-input" value="65" disabled>
+                                <input type="number" class="protection-param-input" value="65">
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">延时 (S)</label>
-                                <input type="number" class="protection-param-input" value="10" disabled>
+                                <input type="number" class="protection-param-input" value="10">
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">解除温度 (℃)</label>
@@ -3533,11 +3726,11 @@
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">低温保护 (℃)</label>
-                                <input type="number" class="protection-param-input" value="-15" disabled>
+                                <input type="number" class="protection-param-input" value="-15">
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">延时 (S)</label>
-                                <input type="number" class="protection-param-input" value="10" disabled>
+                                <input type="number" class="protection-param-input" value="10">
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">解除温度 (℃)</label>
@@ -3664,11 +3857,11 @@
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">延时 (S)</label>
-                                <input type="number" class="protection-param-input" value="5" disabled>
+                                <input type="number" class="protection-param-input" value="5">
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">解除电压 (%)</label>
-                                <input type="number" class="protection-param-input" value="25" disabled>
+                                <input type="number" class="protection-param-input" value="25">
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">压差告警值 (mV)</label>
@@ -3708,27 +3901,27 @@
                             <div class="protection-param-card-title">充电过流二级</div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">充电过流2告警 (A)</label>
-                                <input type="number" class="protection-param-input" value="100" disabled>
+                                <input type="number" class="protection-param-input" value="100">
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">充电过流2保护 (A)</label>
-                                <input type="number" class="protection-param-input" value="120" disabled>
+                                <input type="number" class="protection-param-input" value="120">
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">充电过流2告警延时 (S)</label>
-                                <input type="number" class="protection-param-input" value="5" disabled>
+                                <input type="number" class="protection-param-input" value="5">
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">充电过流2保护延时 (S)</label>
-                                <input type="number" class="protection-param-input" value="10" disabled>
+                                <input type="number" class="protection-param-input" value="10">
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">充电过流2恢复延时 (S)</label>
-                                <input type="number" class="protection-param-input" value="15" disabled>
+                                <input type="number" class="protection-param-input" value="15">
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">充电过流2保护次数</label>
-                                <input type="number" class="protection-param-input" value="3" disabled>
+                                <input type="number" class="protection-param-input" value="3">
                             </div>
                             <div class="protection-param-buttons">
                                 <button class="protection-param-btn read" onclick="readProtectionParams('chargeOC2')">读取</button>
@@ -3746,49 +3939,49 @@
                                 </div>
                                 <div class="protection-param-field">
                                     <label class="protection-param-label">放电过流2保护 (A)</label>
-                                    <input type="number" class="protection-param-input" value="180" disabled>
+                                    <input type="number" class="protection-param-input" value="180">
                                 </div>
                                 <div class="protection-param-field">
                                     <label class="protection-param-label">放电过流2告警延时 (S)</label>
-                                    <input type="number" class="protection-param-input" value="3" disabled>
+                                    <input type="number" class="protection-param-input" value="3">
                                 </div>
                                 <div class="protection-param-field">
                                     <label class="protection-param-label">放电过流2保护延时 (S)</label>
-                                    <input type="number" class="protection-param-input" value="8" disabled>
+                                    <input type="number" class="protection-param-input" value="8">
                                 </div>
                                 <div class="protection-param-field">
                                     <label class="protection-param-label">放电过流2恢复延时 (S)</label>
-                                    <input type="number" class="protection-param-input" value="12" disabled>
+                                    <input type="number" class="protection-param-input" value="12">
                                 </div>
                                 <div class="protection-param-field">
                                     <label class="protection-param-label">放电过流2保护次数</label>
-                                    <input type="number" class="protection-param-input" value="3" disabled>
+                                    <input type="number" class="protection-param-input" value="3">
                                 </div>
                             </div>
                             <div>
                                 <div class="protection-param-field">
                                     <label class="protection-param-label">MOS切断电流 (A)</label>
-                                    <input type="number" class="protection-param-input" value="200" disabled>
+                                    <input type="number" class="protection-param-input" value="200">
                                 </div>
                                 <div class="protection-param-field">
                                     <label class="protection-param-label">MOS切断告警延时 (ms)</label>
-                                    <input type="number" class="protection-param-input" value="100" disabled>
+                                    <input type="number" class="protection-param-input" value="100">
                                 </div>
                                 <div class="protection-param-field">
                                     <label class="protection-param-label">MOS切断保护延时 (ms)</label>
-                                    <input type="number" class="protection-param-input" value="200" disabled>
+                                    <input type="number" class="protection-param-input" value="200">
                                 </div>
                                 <div class="protection-param-field">
                                     <label class="protection-param-label">MOS切断恢复延时 (ms)</label>
-                                    <input type="number" class="protection-param-input" value="300" disabled>
+                                    <input type="number" class="protection-param-input" value="300">
                                 </div>
                                 <div class="protection-param-field">
                                     <label class="protection-param-label">MOS切断保护次数</label>
-                                    <input type="number" class="protection-param-input" value="5" disabled>
+                                    <input type="number" class="protection-param-input" value="5">
                                 </div>
                                 <div class="protection-param-field">
                                     <label class="protection-param-label">SC恢复延时 (S)</label>
-                                    <input type="number" class="protection-param-input" value="60" disabled>
+                                    <input type="number" class="protection-param-input" value="60">
                                 </div>
                             </div>
                             <div class="protection-param-buttons">
@@ -3802,7 +3995,7 @@
                             <div class="protection-param-card-title">过压二级</div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">单体过压2告警 (mV)</label>
-                                <input type="number" class="protection-param-input" value="3700" disabled>
+                                <input type="number" class="protection-param-input" value="3700">
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">单体过压2保护 (mV)</label>
@@ -3810,11 +4003,11 @@
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">单体过压2告警延时 (S)</label>
-                                <input type="number" class="protection-param-input" value="2" disabled>
+                                <input type="number" class="protection-param-input" value="2">
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">单体过压2保护延时 (S)</label>
-                                <input type="number" class="protection-param-input" value="5" disabled>
+                                <input type="number" class="protection-param-input" value="5">
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">单体过压2恢复延时 (S)</label>
@@ -3822,11 +4015,11 @@
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">单体过压2保护次数</label>
-                                <input type="number" class="protection-param-input" value="3" disabled>
+                                <input type="number" class="protection-param-input" value="3">
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">单体过压2恢复值 (mV)</label>
-                                <input type="number" class="protection-param-input" value="3650" disabled>
+                                <input type="number" class="protection-param-input" value="3650">
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">单体过压均衡值 (mV)</label>
@@ -3847,7 +4040,7 @@
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">单体欠压2保护 (mV)</label>
-                                <input type="number" class="protection-param-input" value="2700" disabled>
+                                <input type="number" class="protection-param-input" value="2700">
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">单体欠压2告警延时 (S)</label>
@@ -3855,11 +4048,11 @@
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">单体欠压2保护延时 (S)</label>
-                                <input type="number" class="protection-param-input" value="6" disabled>
+                                <input type="number" class="protection-param-input" value="6">
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">单体欠压2恢复延时 (S)</label>
-                                <input type="number" class="protection-param-input" value="12" disabled>
+                                <input type="number" class="protection-param-input" value="12">
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">单体欠压2保护次数</label>
@@ -3867,11 +4060,11 @@
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">单体欠压2恢复值 (mV)</label>
-                                <input type="number" class="protection-param-input" value="2850" disabled>
+                                <input type="number" class="protection-param-input" value="2850">
                             </div>
                             <div class="protection-param-field">
                                 <label class="protection-param-label">单体欠压均衡值 (mV)</label>
-                                <input type="number" class="protection-param-input" value="3000" disabled>
+                                <input type="number" class="protection-param-input" value="3000">
                             </div>
                             <div class="protection-param-buttons">
                                 <button class="protection-param-btn read" onclick="readProtectionParams('underVoltage2')">读取</button>
@@ -4109,15 +4302,7 @@
 
                 <form id="otaUpgradeForm">
                     <div class="form-group">
-                        <label class="form-label required">PackSize</label>
-                        <input type="number" class="form-input" id="otaPackSize" placeholder="请输入 PackSize (单位:字节)" required value="512">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label required">Delay</label>
-                        <input type="number" class="form-input" id="otaDelay" placeholder="请输入 Delay (单位:毫秒)" required value="100">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label required">固件文件</label>
+                        <label class="form-label">固件文件</label>
                         <div class="file-upload-area" id="fileUploadArea" onclick="document.getElementById('fileInput').click()">
                             <svg class="file-upload-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/>
@@ -4132,10 +4317,369 @@
             </div>
             <div class="modal-footer">
                 <button class="modal-btn cancel" onclick="closeOtaUpgradeModal()">取消</button>
-                <button class="modal-btn success" onclick="startOtaUpgrade()" id="startUpgradeBtn" disabled>升级固件</button>
+                <button class="modal-btn success" onclick="startOtaUpgrade()" id="startUpgradeBtn">升级固件</button>
             </div>
         </div>
     </div>
+
+    <!-- ===== OTA 升级进度弹框 (右下角) ===== -->
+    <div id="otaProgressToast" class="ota-progress-toast">
+        <div class="toast-header">
+            <h3 class="toast-title">OTA升级进度</h3>
+            <button class="toast-close-btn" onclick="closeOtaProgressToast()">
+                <svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
+            </button>
+        </div>
+        <div class="toast-body">
+            <div class="toast-status">
+                <svg class="toast-icon uploading" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                </svg>
+                <span class="toast-status-text" id="otaProgressStatus">正在升级中...</span>
+            </div>
+            <div class="toast-progress">
+                <div class="progress-text" id="otaProgressText">升级进度 1/1 个设备</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="otaProgressBar" style="width: 100%"></div>
+                </div>
+                <div class="progress-percent" id="otaProgressPercent">100%</div>
+            </div>
+            <div class="toast-summary" id="otaSummary">
+                成功: <span id="otaSuccessCount">1</span> 失败: <span id="otaFailCount">0</span> 耗时时间: <span id="otaDuration">完成</span>
+            </div>
+            <div class="toast-complete-message" id="otaCompleteMessage">升级完成!</div>
+            <div class="toast-actions">
+                <button class="toast-btn primary" onclick="showOtaDetails()">查看详情</button>
+                <button class="toast-btn cancel" onclick="closeOtaProgressToast()">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== OTA 升级详情弹框 ===== -->
+    <div class="modal-overlay" id="otaDetailModal">
+        <div class="modal-container medium">
+            <div class="modal-header">
+                <h3 class="modal-title">OTA升级详情</h3>
+                <button class="modal-close-btn" onclick="closeOtaDetailModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="detail-tabs">
+                    <button class="detail-tab active" onclick="switchDetailTab('success')" id="successTab">
+                        <svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                        成功 (<span id="detailSuccessCount">0</span>)
+                    </button>
+                    <button class="detail-tab" onclick="switchDetailTab('failed')" id="failedTab">
+                        <svg width="16" height="16" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        </svg>
+                        失败 (<span id="detailFailCount">0</span>)
+                    </button>
+                </div>
+                <div class="detail-content" id="successContent">
+                    <!-- 成功列表内容 -->
+                </div>
+                <div class="detail-content" id="failedContent" style="display: none;">
+                    <!-- 失败列表内容 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* ===== OTA 进度提示框样式 ===== */
+        .ota-progress-toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 360px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            z-index: 10000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+
+        .ota-progress-toast.show {
+            transform: translateX(0);
+        }
+
+        .toast-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-bottom: 1px solid #E8ECF1;
+        }
+
+        .toast-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2C3E50;
+            margin: 0;
+        }
+
+        .toast-close-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            color: #7F8C9A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .toast-close-btn:hover {
+            background: #F5F7FA;
+            color: #2C3E50;
+        }
+
+        .toast-body {
+            padding: 20px;
+        }
+
+        .toast-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .toast-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .toast-icon.uploading {
+            fill: #1E6BFF;
+            animation: spin 1s linear infinite;
+        }
+
+        .toast-icon.completed {
+            fill: #00B578;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .toast-status-text {
+            font-size: 14px;
+            color: #2C3E50;
+            font-weight: 500;
+        }
+
+        .toast-progress {
+            margin-bottom: 16px;
+        }
+
+        .progress-text {
+            font-size: 13px;
+            color: #7F8C9A;
+            margin-bottom: 8px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #E8ECF1;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #1E6BFF 0%, #4D8FFF 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-percent {
+            font-size: 13px;
+            color: #1E6BFF;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .toast-summary {
+            font-size: 13px;
+            color: #7F8C9A;
+            margin-bottom: 12px;
+            padding: 12px;
+            background: #F5F7FA;
+            border-radius: 8px;
+        }
+
+        .toast-summary span {
+            font-weight: 600;
+            color: #2C3E50;
+        }
+
+        .toast-complete-message {
+            display: none;
+            font-size: 14px;
+            color: #00B578;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .toast-complete-message.show {
+            display: block;
+        }
+
+        .toast-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .toast-btn {
+            flex: 1;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .toast-btn.primary {
+            background: #1E6BFF;
+            color: white;
+        }
+
+        .toast-btn.primary:hover {
+            background: #1557D9;
+        }
+
+        .toast-btn.cancel {
+            background: #F5F7FA;
+            color: #7F8C9A;
+        }
+
+        .toast-btn.cancel:hover {
+            background: #E8ECF1;
+            color: #2C3E50;
+        }
+
+        /* ===== OTA 详情弹框样式 ===== */
+        .detail-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #E8ECF1;
+        }
+
+        .detail-tab {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            background: none;
+            font-size: 14px;
+            font-weight: 500;
+            color: #7F8C9A;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .detail-tab:hover {
+            color: #2C3E50;
+        }
+
+        .detail-tab.active {
+            color: #1E6BFF;
+            border-bottom-color: #1E6BFF;
+        }
+
+        .detail-tab svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .detail-content {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .detail-item {
+            padding: 16px;
+            border: 1px solid #E8ECF1;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            background: #F5F7FA;
+        }
+
+        .detail-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .detail-item-id {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2C3E50;
+        }
+
+        .detail-item-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .detail-item-badge.success {
+            background: #E6F7F0;
+            color: #00B578;
+        }
+
+        .detail-item-badge.failed {
+            background: #FFEBE9;
+            color: #FF3B30;
+        }
+
+        .detail-item-name {
+            font-size: 13px;
+            color: #7F8C9A;
+            margin-bottom: 8px;
+        }
+
+        .detail-item-version {
+            font-size: 13px;
+            color: #7F8C9A;
+        }
+
+        .detail-item-version span {
+            color: #2C3E50;
+            font-weight: 500;
+        }
+
+        .detail-item-time {
+            font-size: 12px;
+            color: #7F8C9A;
+            margin-top: 8px;
+        }
+    </style>
 
     <script>
         // ===== 模拟设备数据 =====
@@ -4304,14 +4848,9 @@
                                     <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
                                 </svg>
                             </button>
-                            <button class="table-action-btn" title="编辑" onclick="editDevice('${device.id}')">
+                            <button class="table-action-btn" title="固件升级" onclick="openFirmwareUpgrade('${device.id}', '${device.name}')">
                                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
-                                </svg>
-                            </button>
-                            <button class="table-action-btn delete" title="删除" onclick="deleteDevice('${device.id}')">
-                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                                    <path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"/>
                                 </svg>
                             </button>
                         </div>
@@ -4816,6 +5355,315 @@
             alert(message);
         }
 
+        // ===== 固件升级功能 =====
+        let currentUpgradeDevice = null;
+        let selectedFirmwareFile = null;
+
+        function openFirmwareUpgrade(deviceId, deviceName) {
+            currentUpgradeDevice = { id: deviceId, name: deviceName };
+
+            // 设置表单数据
+            document.getElementById('firmwareDeviceId').value = deviceId;
+            document.getElementById('firmwareDeviceName').value = deviceName;
+
+            // 更新标题
+            document.getElementById('firmwareUpgradeTitle').textContent = `${deviceId} - 升级固件`;
+
+            // 重置文件选择
+            selectedFirmwareFile = null;
+            document.getElementById('firmwareFileInput').value = '';
+            document.getElementById('firmwareFileInfo').style.display = 'none';
+            document.getElementById('firmwareUploadArea').style.display = 'block';
+
+            // 显示弹框
+            document.getElementById('firmwareUpgradeModal').classList.add('active');
+        }
+
+        function closeFirmwareUpgradeModal() {
+            document.getElementById('firmwareUpgradeModal').classList.remove('active');
+            currentUpgradeDevice = null;
+            selectedFirmwareFile = null;
+        }
+
+        function handleFirmwareFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            // 验证文件类型
+            if (!file.name.endsWith('.bin')) {
+                alert('请选择 .bin 文件');
+                event.target.value = '';
+                return;
+            }
+
+            // 验证文件大小（500KB = 512000 bytes）
+            if (file.size > 512000) {
+                alert('文件大小不能超过 500kb');
+                event.target.value = '';
+                return;
+            }
+
+            selectedFirmwareFile = file;
+
+            // 显示文件信息
+            document.getElementById('firmwareFileName').textContent = file.name;
+            document.getElementById('firmwareFileSize').textContent = formatFileSize(file.size);
+            document.getElementById('firmwareFileInfo').style.display = 'flex';
+            document.getElementById('firmwareUploadArea').style.display = 'none';
+        }
+
+        function removeFirmwareFile() {
+            selectedFirmwareFile = null;
+            document.getElementById('firmwareFileInput').value = '';
+            document.getElementById('firmwareFileInfo').style.display = 'none';
+            document.getElementById('firmwareUploadArea').style.display = 'block';
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(2) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+        }
+
+        async function submitFirmwareUpgrade() {
+            if (!currentUpgradeDevice) {
+                alert('未选择设备');
+                return;
+            }
+
+            // 保存设备ID,因为关闭弹框会清空 currentUpgradeDevice
+            const deviceId = currentUpgradeDevice.id;
+
+            // 关闭弹框
+            closeFirmwareUpgradeModal();
+
+            // 执行单设备升级
+            await simulateOtaUpgrade([deviceId]);
+        }
+
+        // 文件拖放支持
+        document.addEventListener('DOMContentLoaded', function() {
+            const uploadArea = document.getElementById('firmwareUploadArea');
+            if (uploadArea) {
+                uploadArea.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    uploadArea.classList.add('dragover');
+                });
+
+                uploadArea.addEventListener('dragleave', function(e) {
+                    e.preventDefault();
+                    uploadArea.classList.remove('dragover');
+                });
+
+                uploadArea.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    uploadArea.classList.remove('dragover');
+
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        const file = files[0];
+                        document.getElementById('firmwareFileInput').files = files;
+                        handleFirmwareFileSelect({ target: { files: [file] } });
+                    }
+                });
+            }
+        });
+
+        // ===== Logo设置功能 =====
+        let selectedLogoFile = null;
+        let currentLogoDataUrl = null;
+
+        // 从localStorage加载已保存的logo
+        function loadSavedLogo() {
+            const savedLogo = localStorage.getItem('customLogo');
+            if (savedLogo) {
+                currentLogoDataUrl = savedLogo;
+                applyLogoToPage(savedLogo);
+            }
+        }
+
+        // 应用logo到页面
+        function applyLogoToPage(logoDataUrl) {
+            const logoImg = document.querySelector('.brand-logo img');
+            if (logoImg) {
+                logoImg.src = logoDataUrl;
+            } else {
+                // 如果元素还未加载，等待DOM加载完成后再试
+                setTimeout(function() {
+                    const img = document.querySelector('.brand-logo img');
+                    if (img) {
+                        img.src = logoDataUrl;
+                    }
+                }, 100);
+            }
+        }
+
+        // 立即尝试加载logo（在脚本加载时就执行）
+        loadSavedLogo();
+
+        function openLogoSettingModal() {
+            const modal = document.getElementById('logoSettingModal');
+            modal.classList.add('active');
+
+            // 如果已有保存的logo，显示预览
+            if (currentLogoDataUrl) {
+                const previewImg = document.getElementById('logoPreviewImage');
+                const placeholder = document.getElementById('logoUploadPlaceholder');
+                const uploadArea = document.getElementById('logoUploadArea');
+
+                previewImg.src = currentLogoDataUrl;
+                previewImg.style.display = 'block';
+                placeholder.style.display = 'none';
+                uploadArea.classList.add('has-image');
+
+                // 启用确认按钮
+                document.getElementById('logoConfirmBtn').disabled = false;
+            }
+
+            // 关闭用户下拉菜单
+            const userMenu = document.querySelector('.user-menu');
+            if (userMenu) {
+                userMenu.classList.remove('active');
+            }
+        }
+
+        function closeLogoSettingModal() {
+            const modal = document.getElementById('logoSettingModal');
+            modal.classList.remove('active');
+
+            // 重置上传状态
+            resetLogoUpload();
+        }
+
+        function resetLogoUpload() {
+            selectedLogoFile = null;
+            document.getElementById('logoFileInput').value = '';
+            document.getElementById('logoUploadError').style.display = 'none';
+
+            const uploadArea = document.getElementById('logoUploadArea');
+            uploadArea.classList.remove('error', 'has-image');
+
+            // 如果没有已保存的logo，重置为初始状态
+            if (!currentLogoDataUrl) {
+                document.getElementById('logoPreviewImage').style.display = 'none';
+                document.getElementById('logoUploadPlaceholder').style.display = 'flex';
+                document.getElementById('logoConfirmBtn').disabled = true;
+            }
+        }
+
+        function handleLogoFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const errorDiv = document.getElementById('logoUploadError');
+            const uploadArea = document.getElementById('logoUploadArea');
+            errorDiv.style.display = 'none';
+            uploadArea.classList.remove('error');
+
+            // 验证文件类型
+            const validTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+            if (!validTypes.includes(file.type)) {
+                errorDiv.textContent = '请上传 PNG/JPG 格式的图片';
+                errorDiv.style.display = 'block';
+                uploadArea.classList.add('error');
+                event.target.value = '';
+                return;
+            }
+
+            // 创建图片对象验证尺寸
+            const img = new Image();
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                img.onload = function() {
+                    // 验证尺寸
+                    if (img.width > 500 || img.height > 200) {
+                        errorDiv.textContent = '请上传 PNG/JPG 格式，尺寸不超过 500×200px';
+                        errorDiv.style.display = 'block';
+                        uploadArea.classList.add('error');
+                        event.target.value = '';
+                        return;
+                    }
+
+                    // 验证通过，显示预览
+                    selectedLogoFile = file;
+                    const previewImg = document.getElementById('logoPreviewImage');
+                    const placeholder = document.getElementById('logoUploadPlaceholder');
+
+                    previewImg.src = e.target.result;
+                    previewImg.style.display = 'block';
+                    placeholder.style.display = 'none';
+                    uploadArea.classList.add('has-image');
+
+                    // 启用确认按钮
+                    document.getElementById('logoConfirmBtn').disabled = false;
+                };
+                img.src = e.target.result;
+            };
+
+            reader.readAsDataURL(file);
+        }
+
+        function submitLogoSetting() {
+            if (!selectedLogoFile && !currentLogoDataUrl) {
+                alert('请选择logo图片');
+                return;
+            }
+
+            const previewImg = document.getElementById('logoPreviewImage');
+            const logoDataUrl = previewImg.src;
+
+            // 保存到localStorage
+            localStorage.setItem('customLogo', logoDataUrl);
+            currentLogoDataUrl = logoDataUrl;
+
+            // 应用到当前页面
+            applyLogoToPage(logoDataUrl);
+
+            // 显示成功提示
+            showToast('Logo 设置成功！');
+
+            // 关闭弹框
+            closeLogoSettingModal();
+        }
+
+        // Logo拖放支持
+        document.addEventListener('DOMContentLoaded', function() {
+            const uploadArea = document.getElementById('logoUploadArea');
+            if (uploadArea) {
+                uploadArea.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    uploadArea.classList.add('dragover');
+                });
+
+                uploadArea.addEventListener('dragleave', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    uploadArea.classList.remove('dragover');
+                });
+
+                uploadArea.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    uploadArea.classList.remove('dragover');
+
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        const file = files[0];
+                        const input = document.getElementById('logoFileInput');
+
+                        // 创建新的FileList
+                        const dataTransfer = new DataTransfer();
+                        dataTransfer.items.add(file);
+                        input.files = dataTransfer.files;
+
+                        handleLogoFileSelect({ target: { files: [file], value: input.value } });
+                    }
+                });
+            }
+        });
+
         // ===== 菜单交互 =====
         function toggleMenu(element) {
             const isExpanded = element.classList.contains('expanded');
@@ -5112,7 +5960,6 @@
             document.getElementById('otaUpgradeForm').reset();
             document.getElementById('fileInfo').style.display = 'none';
             document.getElementById('fileInput').value = '';
-            document.getElementById('startUpgradeBtn').disabled = true;
         }
 
         function removeDeviceFromUpgrade(deviceId) {
@@ -5174,51 +6021,240 @@
                     </button>
                 </div>
             `;
-
-            // 启用升级按钮
-            document.getElementById('startUpgradeBtn').disabled = false;
         }
 
         function removeSelectedFile() {
             selectedFile = null;
             document.getElementById('fileInput').value = '';
             document.getElementById('fileInfo').style.display = 'none';
-            document.getElementById('startUpgradeBtn').disabled = true;
         }
 
-        function startOtaUpgrade() {
-            const packSize = document.getElementById('otaPackSize').value;
-            const delay = document.getElementById('otaDelay').value;
-
-            if (!packSize || !delay) {
-                alert('请填写所有必填字段');
-                return;
-            }
-
-            if (!selectedFile) {
-                alert('请选择固件文件');
-                return;
-            }
-
-            // 执行升级
-            alert(`开始升级 ${selectedDevices.size} 个设备\nPackSize: ${packSize}\nDelay: ${delay}\n文件: ${selectedFile.name}`);
-
-            // 模拟升级成功,更新设备版本
-            const newVersion = 'v' + (Math.random() * 2 + 1).toFixed(1) + '.' + Math.floor(Math.random() * 10);
-            selectedDevices.forEach(deviceId => {
-                const device = mockDevices.find(d => d.id === deviceId);
-                if (device) {
-                    device.version = newVersion;
-                }
-            });
-
-            renderTable();
+        async function startOtaUpgrade() {
+            // 关闭OTA升级弹框
             closeOtaUpgradeModal();
+
+            // 执行升级,传入选中的设备ID数组
+            const deviceArray = Array.from(selectedDevices);
+            await simulateOtaUpgrade(deviceArray);
 
             // 清空选择
             selectedDevices.clear();
             document.querySelectorAll('.device-checkbox').forEach(cb => cb.checked = false);
             document.getElementById('selectAll').checked = false;
+        }
+
+        // ===== OTA 升级进度弹框控制 =====
+        let otaUpgradeResults = {
+            successList: [],
+            failedList: [],
+            startTime: null,
+            endTime: null
+        };
+
+        function showOtaProgressToast() {
+            const toast = document.getElementById('otaProgressToast');
+
+            if (toast) {
+                // 重置进度弹框状态
+                const icon = toast.querySelector('.toast-icon');
+                if (icon) {
+                    icon.classList.remove('completed');
+                    icon.classList.add('uploading');
+                }
+
+                document.getElementById('otaProgressStatus').textContent = '正在升级中...';
+                document.getElementById('otaProgressText').textContent = '升级进度 0/0 个设备';
+                document.getElementById('otaProgressBar').style.width = '0%';
+                document.getElementById('otaProgressPercent').textContent = '0%';
+                document.getElementById('otaSuccessCount').textContent = '0';
+                document.getElementById('otaFailCount').textContent = '0';
+                document.getElementById('otaDuration').textContent = '0秒';
+
+                const completeMessage = document.getElementById('otaCompleteMessage');
+                if (completeMessage) {
+                    completeMessage.classList.remove('show');
+                }
+
+                // 显示弹框
+                toast.classList.add('show');
+            }
+        }
+
+        function closeOtaProgressToast() {
+            const toast = document.getElementById('otaProgressToast');
+            toast.classList.remove('show');
+        }
+
+        function updateOtaProgress(current, total, successCount, failCount) {
+            const percent = Math.round((current / total) * 100);
+
+            document.getElementById('otaProgressText').textContent = `升级进度 ${current}/${total} 个设备`;
+            document.getElementById('otaProgressBar').style.width = percent + '%';
+            document.getElementById('otaProgressPercent').textContent = percent + '%';
+            document.getElementById('otaSuccessCount').textContent = successCount;
+            document.getElementById('otaFailCount').textContent = failCount;
+
+            // 计算耗时
+            if (otaUpgradeResults.startTime) {
+                const elapsed = Math.floor((Date.now() - otaUpgradeResults.startTime) / 1000);
+                document.getElementById('otaDuration').textContent = `${elapsed}秒`;
+            }
+        }
+
+        function completeOtaProgress() {
+            const icon = document.querySelector('.toast-icon');
+            icon.classList.remove('uploading');
+            icon.classList.add('completed');
+
+            document.getElementById('otaProgressStatus').textContent = '升级完成';
+            document.getElementById('otaCompleteMessage').classList.add('show');
+
+            // 最终计算耗时
+            if (otaUpgradeResults.startTime && otaUpgradeResults.endTime) {
+                const elapsed = Math.floor((otaUpgradeResults.endTime - otaUpgradeResults.startTime) / 1000);
+                document.getElementById('otaDuration').textContent = `${elapsed}秒`;
+            } else {
+                document.getElementById('otaDuration').textContent = '完成';
+            }
+        }
+
+        // ===== OTA 详情弹框控制 =====
+        function showOtaDetails() {
+            // 填充详情数据
+            renderOtaDetails();
+
+            // 显示详情弹框
+            document.getElementById('otaDetailModal').classList.add('active');
+        }
+
+        function closeOtaDetailModal() {
+            document.getElementById('otaDetailModal').classList.remove('active');
+        }
+
+        function switchDetailTab(tab) {
+            // 切换标签状态
+            if (tab === 'success') {
+                document.getElementById('successTab').classList.add('active');
+                document.getElementById('failedTab').classList.remove('active');
+                document.getElementById('successContent').style.display = 'block';
+                document.getElementById('failedContent').style.display = 'none';
+            } else {
+                document.getElementById('successTab').classList.remove('active');
+                document.getElementById('failedTab').classList.add('active');
+                document.getElementById('successContent').style.display = 'none';
+                document.getElementById('failedContent').style.display = 'block';
+            }
+        }
+
+        function renderOtaDetails() {
+            // 更新计数
+            document.getElementById('detailSuccessCount').textContent = otaUpgradeResults.successList.length;
+            document.getElementById('detailFailCount').textContent = otaUpgradeResults.failedList.length;
+
+            // 渲染成功列表
+            const successContent = document.getElementById('successContent');
+            if (otaUpgradeResults.successList.length === 0) {
+                successContent.innerHTML = '<p style="text-align: center; color: #7F8C9A; padding: 40px 0;">暂无数据</p>';
+            } else {
+                successContent.innerHTML = otaUpgradeResults.successList.map(item => `
+                    <div class="detail-item">
+                        <div class="detail-item-header">
+                            <div class="detail-item-id">${item.id}</div>
+                            <div class="detail-item-badge success">升级成功</div>
+                        </div>
+                        <div class="detail-item-name">储能柜-${item.name}</div>
+                        <div class="detail-item-version">
+                            版本更新 <span>${item.oldVersion} → ${item.newVersion}</span>
+                        </div>
+                        <div class="detail-item-time">升级时间: ${item.time}</div>
+                    </div>
+                `).join('');
+            }
+
+            // 渲染失败列表
+            const failedContent = document.getElementById('failedContent');
+            if (otaUpgradeResults.failedList.length === 0) {
+                failedContent.innerHTML = '<p style="text-align: center; color: #7F8C9A; padding: 40px 0;">暂无数据</p>';
+            } else {
+                failedContent.innerHTML = otaUpgradeResults.failedList.map(item => `
+                    <div class="detail-item">
+                        <div class="detail-item-header">
+                            <div class="detail-item-id">${item.id}</div>
+                            <div class="detail-item-badge failed">升级失败</div>
+                        </div>
+                        <div class="detail-item-name">储能柜-${item.name}</div>
+                        <div class="detail-item-version">
+                            当前版本 <span>${item.version}</span>
+                        </div>
+                        <div class="detail-item-time">失败时间: ${item.time}</div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // ===== 模拟升级过程 =====
+        async function simulateOtaUpgrade(devices) {
+            // 重置结果
+            otaUpgradeResults = {
+                successList: [],
+                failedList: [],
+                startTime: Date.now(),
+                endTime: null
+            };
+
+            // 显示进度提示框
+            showOtaProgressToast();
+
+            let current = 0;
+            const total = devices.length;
+
+            for (const deviceId of devices) {
+                const device = mockDevices.find(d => d.id === deviceId);
+                if (!device) continue;
+
+                // 模拟升级延迟(每个设备500-1500ms)
+                await new Promise(resolve => setTimeout(resolve, 500 + Math.random() * 1000));
+
+                current++;
+
+                // 模拟90%成功率
+                const isSuccess = Math.random() > 0.1;
+                const now = new Date();
+                const timeString = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
+
+                if (isSuccess) {
+                    // 升级成功
+                    const oldVersion = device.version;
+                    const newVersion = 'v' + (parseFloat(oldVersion.substring(1)) + 0.1).toFixed(1);
+                    device.version = newVersion;
+
+                    otaUpgradeResults.successList.push({
+                        id: device.id,
+                        name: device.name,
+                        oldVersion: oldVersion,
+                        newVersion: newVersion,
+                        time: timeString
+                    });
+                } else {
+                    // 升级失败
+                    otaUpgradeResults.failedList.push({
+                        id: device.id,
+                        name: device.name,
+                        version: device.version,
+                        time: timeString
+                    });
+                }
+
+                // 更新进度
+                updateOtaProgress(current, total, otaUpgradeResults.successList.length, otaUpgradeResults.failedList.length);
+            }
+
+            // 升级完成
+            otaUpgradeResults.endTime = Date.now();
+            completeOtaProgress();
+
+            // 更新表格显示
+            renderTable();
         }
 
         // 点击弹框外部关闭
@@ -5307,23 +6343,46 @@
             // 检查URL参数,自动打开设备详情弹框
             const urlParams = new URLSearchParams(window.location.search);
             const username = urlParams.get('user');
+            const deviceId = urlParams.get('deviceId');
             const shouldOpenDetail = urlParams.get('openDetail');
+            const activeTab = urlParams.get('activeTab');
 
-            if (username && shouldOpenDetail === 'true') {
-                // 用户名到设备ID的映射
-                const userDeviceMap = {
-                    'Supertron': 'BMS001',
-                    'admin': 'BMS002',
-                    'zhangsan': 'BMS003',
-                    'lisi': 'BMS004',
-                    'wangwu': 'BMS005'
-                };
+            if (shouldOpenDetail === 'true') {
+                let targetDeviceId = deviceId;
 
-                const deviceId = userDeviceMap[username];
-                if (deviceId) {
+                // 如果没有deviceId但有username,通过用户名映射获取设备ID
+                if (!targetDeviceId && username) {
+                    const userDeviceMap = {
+                        'Supertron': 'BMS001',
+                        'admin': 'BMS002',
+                        'zhangsan': 'BMS003',
+                        'lisi': 'BMS004',
+                        'wangwu': 'BMS005'
+                    };
+                    targetDeviceId = userDeviceMap[username];
+                }
+
+                if (targetDeviceId) {
                     // 延迟打开,确保页面完全加载
                     setTimeout(() => {
-                        viewDevice(deviceId);
+                        viewDevice(targetDeviceId);
+
+                        // 如果指定了activeTab参数,切换到对应标签页
+                        if (activeTab) {
+                            setTimeout(() => {
+                                // 标签页索引映射: monitor(实时监控)=0, history(历史记录)=1, protection(保护参数)=2, inverter(逆变器参数)=3
+                                const tabIndexMap = {
+                                    'monitor': 0,
+                                    'history': 1,
+                                    'protection': 2,
+                                    'inverter': 3
+                                };
+                                const tabIndex = tabIndexMap[activeTab];
+                                if (tabIndex !== undefined) {
+                                    switchTab(tabIndex);
+                                }
+                            }, 300);
+                        }
                     }, 100);
                 }
             }

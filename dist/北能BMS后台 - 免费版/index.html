@@ -830,6 +830,17 @@
                 this.parentElement.style.transform = 'translateY(0)';
             });
         });
+
+        // ===== 加载自定义 logo =====
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedLogo = localStorage.getItem('customLogo');
+            if (savedLogo) {
+                const logoImage = document.querySelector('.logo-image');
+                if (logoImage) {
+                    logoImage.src = savedLogo;
+                }
+            }
+        });
     </script>
 </body>
 </html>
