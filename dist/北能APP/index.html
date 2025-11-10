@@ -18,55 +18,65 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        .main-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            position: relative;
         }
 
         .register-container {
             width: 100%;
             max-width: 400px;
+            max-height: 95vh;
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            overflow: visible;
+            overflow-y: auto;
             position: relative;
         }
 
         .register-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 40px 30px;
+            padding: 25px 30px;
             text-align: center;
             color: white;
             border-radius: 20px 20px 0 0;
         }
 
         .register-header h1 {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
 
         .register-header p {
-            font-size: 14px;
+            font-size: 13px;
             opacity: 0.9;
         }
 
         .register-form {
-            padding: 30px;
+            padding: 20px 30px 25px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .form-group label {
             display: block;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             color: #333;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .form-group label .required {
@@ -80,8 +90,8 @@
 
         .input-wrapper input {
             width: 100%;
-            padding: 12px 15px;
-            font-size: 15px;
+            padding: 10px 15px;
+            font-size: 14px;
             border: 2px solid #e0e0e0;
             border-radius: 10px;
             outline: none;
@@ -116,12 +126,12 @@
         }
 
         .verification-group button {
-            padding: 12px 20px;
+            padding: 10px 18px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
             border-radius: 10px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             cursor: pointer;
             white-space: nowrap;
@@ -182,7 +192,7 @@
         .checkbox-group {
             display: flex;
             align-items: center;
-            margin: 25px 0;
+            margin: 18px 0 15px;
         }
 
         .checkbox-group input[type="checkbox"] {
@@ -210,12 +220,12 @@
 
         .register-button {
             width: 100%;
-            padding: 14px;
+            padding: 12px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
             border-radius: 10px;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -240,8 +250,8 @@
 
         .login-link {
             text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
+            margin-top: 15px;
+            font-size: 13px;
             color: #666;
         }
 
@@ -270,12 +280,157 @@
             border-color: #ff4757;
         }
 
-        /* 手机图标样式 */
-        .icon-phone::before { content: "📱"; }
+        /* 图标样式 */
         .icon-lock::before { content: "🔒"; }
         .icon-user::before { content: "👤"; }
         .icon-code::before { content: "🔐"; }
         .icon-email::before { content: "📧"; }
+
+        /* 邀请码输入框样式 */
+        .invite-code-wrapper {
+            position: relative;
+        }
+
+        .invite-code-wrapper input {
+            width: 100%;
+            padding: 10px 15px;
+            font-size: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .invite-code-wrapper input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .invite-code-wrapper input::placeholder {
+            color: #bbb;
+        }
+
+        .invite-code-wrapper .icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 18px;
+            pointer-events: none;
+        }
+
+        /* 邀请码下拉列表 */
+        .invite-code-dropdown {
+            position: absolute;
+            top: calc(100% + 5px);
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        .invite-code-dropdown.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .invite-code-option {
+            padding: 12px 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid #f5f5f5;
+            font-size: 14px;
+        }
+
+        .invite-code-option:last-child {
+            border-bottom: none;
+        }
+
+        .invite-code-option:hover {
+            background: #f8f9ff;
+            color: #667eea;
+        }
+
+        .invite-code-option.selected {
+            background: #667eea;
+            color: white;
+        }
+
+        .invite-code-option .code-text {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .invite-code-option.selected .code-text {
+            color: white;
+        }
+
+        .invite-code-option .distributor-name {
+            font-size: 12px;
+            color: #999;
+            margin-left: 8px;
+        }
+
+        .invite-code-option.selected .distributor-name {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* 右侧提示框样式 */
+        .hint-box {
+            background: white;
+            border-radius: 12px;
+            padding: 20px 24px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border-left: 4px solid #667eea;
+            animation: slideInRight 0.5s ease;
+            min-width: 220px;
+            max-width: 280px;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hint-box-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hint-box-content {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
 
         /* 响应式设计 */
         @media (max-width: 480px) {
@@ -302,6 +457,17 @@
 
             .verification-group button {
                 width: 100%;
+            }
+
+            .hint-box {
+                display: none;
+            }
+        }
+
+        /* 在小屏幕上隐藏提示框 */
+        @media (max-width: 1024px) {
+            .hint-box {
+                display: none;
             }
         }
 
@@ -341,315 +507,50 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        /* 弹框遮罩 */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal-overlay.show {
-            display: flex;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* 弹框容器 */
-        .modal-container {
-            background: white;
-            border-radius: 16px;
-            width: 90%;
-            max-width: 400px;
-            max-height: 80vh;
-            overflow: visible;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* 弹框头部 */
-        .modal-header {
-            padding: 20px;
-            border-bottom: 1px solid #e0e0e0;
-            text-align: center;
-        }
-
-        .modal-header h3 {
-            font-size: 18px;
-            font-weight: 600;
-            color: #333;
-            margin: 0;
-        }
-
-        /* 弹框内容 */
-        .modal-body {
-            padding: 20px;
-            min-height: 300px;
-            position: relative;
-        }
-
-        .modal-body label {
-            display: block;
-            font-size: 14px;
-            font-weight: 500;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .modal-body label .required {
-            color: #ff4757;
-            margin-left: 2px;
-        }
-
-        /* 自定义下拉选择器 */
-        .custom-select-wrapper {
-            position: relative;
-        }
-
-        .custom-select {
-            width: 100%;
-            padding: 12px 40px 12px 15px;
-            font-size: 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            outline: none;
-            cursor: pointer;
-            background: white;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: #333;
-        }
-
-        .custom-select.placeholder {
-            color: #bbb;
-        }
-
-        .custom-select:hover {
-            border-color: #667eea;
-        }
-
-        .custom-select:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-
-        .custom-select::after {
-            content: "▼";
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #999;
-            font-size: 12px;
-            pointer-events: none;
-            transition: transform 0.3s ease;
-        }
-
-        .custom-select.open::after {
-            transform: translateY(-50%) rotate(180deg);
-        }
-
-        /* 下拉选项列表 */
-        .select-options {
-            position: absolute;
-            top: calc(100% + 5px);
-            left: 0;
-            right: 0;
-            background: white;
-            border: 2px solid #667eea;
-            border-radius: 10px;
-            max-height: 320px;
-            overflow-y: auto;
-            z-index: 1000;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-            display: none;
-        }
-
-        .select-options.show {
-            display: block;
-            animation: slideDown 0.3s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .select-option {
-            padding: 12px 15px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border-bottom: 1px solid #f5f5f5;
-        }
-
-        .select-option:last-child {
-            border-bottom: none;
-        }
-
-        .select-option:hover {
-            background: #f8f9ff;
-            color: #667eea;
-        }
-
-        .select-option.selected {
-            background: #667eea;
-            color: white;
-        }
-
-        .select-option-code {
-            font-weight: 600;
-            margin-right: 8px;
-            color: #667eea;
-        }
-
-        .select-option.selected .select-option-code {
-            color: white;
-        }
-
-        /* 弹框底部 */
-        .modal-footer {
-            padding: 15px 20px;
-            border-top: 1px solid #e0e0e0;
-        }
-
-        .modal-footer button {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        .modal-footer button:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .modal-footer button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        /* 右侧提示框 */
-        .hint-box {
-            position: absolute;
-            left: calc(100% + 20px);
-            top: 50%;
-            transform: translateY(-50%);
-            background: white;
-            border-radius: 12px;
-            padding: 20px 24px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-            border-left: 4px solid #667eea;
-            animation: slideInRight 0.5s ease;
-            z-index: 100;
-            min-width: 200px;
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateY(-50%) translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(-50%) translateX(0);
-            }
-        }
-
-        .hint-box-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: #667eea;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .hint-box-title::before {
-            content: "💡";
-            font-size: 18px;
-        }
-
-        .hint-box-content {
-            font-size: 14px;
-            color: #666;
-            line-height: 1.6;
-        }
-
-        /* 响应式 - 在小屏幕上隐藏提示框 */
-        @media (max-width: 1024px) {
-            .hint-box {
-                display: none;
-            }
-        }
     </style>
 </head>
 <body>
-    <div class="register-container">
+    <div class="main-wrapper">
+        <div class="register-container">
         <div class="register-header">
             <h1>用户注册</h1>
             <p>创建您的北能储能系统账户</p>
         </div>
 
         <form class="register-form" id="registerForm">
-            <!-- 手机号 -->
+            <!-- 用户名 -->
             <div class="form-group">
-                <label for="phone">手机号 <span class="required">*</span></label>
-                <div class="input-wrapper" id="phoneWrapper">
+                <label for="username">用户名 <span class="required">*</span></label>
+                <div class="input-wrapper" id="usernameWrapper">
                     <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        placeholder="请输入手机号"
-                        maxlength="11"
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="请输入用户名"
                     >
-                    <span class="icon icon-phone"></span>
+                    <span class="icon icon-user"></span>
                 </div>
-                <div class="error-message" id="phoneError">请输入正确的手机号</div>
+                <div class="error-message" id="usernameError">用户名长度为3-20个字符</div>
+            </div>
+
+            <!-- 邮箱 -->
+            <div class="form-group">
+                <label for="email">邮箱 <span class="required">*</span></label>
+                <div class="input-wrapper" id="emailWrapper">
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="请输入邮箱"
+                    >
+                    <span class="icon icon-email"></span>
+                </div>
+                <div class="error-message" id="emailError">请输入正确的邮箱格式</div>
             </div>
 
             <!-- 验证码 -->
             <div class="form-group">
-                <label for="verificationCode">短信验证码 <span class="required">*</span></label>
+                <label for="verificationCode">验证码 <span class="required">*</span></label>
                 <div class="verification-group">
                     <div class="input-wrapper" id="codeWrapper">
                         <input
@@ -666,36 +567,6 @@
                     </button>
                 </div>
                 <div class="error-message" id="codeError">请输入验证码</div>
-            </div>
-
-            <!-- 用户名 -->
-            <div class="form-group">
-                <label for="username">用户名 <span class="required">*</span></label>
-                <div class="input-wrapper" id="usernameWrapper">
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        placeholder="请输入用户名"
-                    >
-                    <span class="icon icon-user"></span>
-                </div>
-                <div class="error-message" id="usernameError">用户名长度为3-20个字符</div>
-            </div>
-
-            <!-- 邮箱(可选) -->
-            <div class="form-group">
-                <label for="email">邮箱</label>
-                <div class="input-wrapper" id="emailWrapper">
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="请输入邮箱(可选)"
-                    >
-                    <span class="icon icon-email"></span>
-                </div>
-                <div class="error-message" id="emailError">请输入正确的邮箱格式</div>
             </div>
 
             <!-- 密码 -->
@@ -732,6 +603,25 @@
                 <div class="error-message" id="confirmPasswordError">两次密码输入不一致</div>
             </div>
 
+            <!-- 邀请码 -->
+            <div class="form-group">
+                <label for="inviteCode">邀请码 <span class="required">*</span></label>
+                <div class="invite-code-wrapper">
+                    <input
+                        type="text"
+                        id="inviteCode"
+                        name="inviteCode"
+                        placeholder="请输入或选择邀请码"
+                        autocomplete="off"
+                    >
+                    <span class="icon icon-invite">🎫</span>
+                    <div class="invite-code-dropdown" id="inviteCodeDropdown">
+                        <!-- 下拉选项将由JavaScript动态生成 -->
+                    </div>
+                </div>
+                <div class="error-message" id="inviteCodeError">请输入邀请码</div>
+            </div>
+
             <!-- 同意协议 -->
             <div class="checkbox-group">
                 <input type="checkbox" id="agreeTerms" name="agreeTerms">
@@ -750,61 +640,19 @@
                 已有账号? <a href="login.html">立即登录</a>
             </div>
         </form>
+        </div>
 
-        <!-- 右侧提示框 -->
+        <!-- 温馨提示框 -->
         <div class="hint-box">
-            <div class="hint-box-title">操作提示</div>
-            <div class="hint-box-content">请点击立即注册按钮</div>
+            <div class="hint-box-title">💡 温馨提示</div>
+            <div class="hint-box-content">注册时填写邀请码,通过邀请码和分销商进行绑定</div>
         </div>
     </div>
 
     <!-- 成功提示 -->
     <div class="success-toast" id="successToast">注册成功!</div>
 
-    <!-- 分销商选择弹框 -->
-    <div class="modal-overlay" id="distributorModal">
-        <div class="modal-container">
-            <div class="modal-header">
-                <h3>请选择分销商</h3>
-            </div>
-            <div class="modal-body">
-                <label>选择分销商 <span class="required">*</span></label>
-                <div class="custom-select-wrapper">
-                    <div class="custom-select placeholder" id="distributorSelect" onclick="toggleDistributorOptions()">
-                        <span id="distributorSelectText">请选择分销商</span>
-                    </div>
-                    <div class="select-options" id="distributorOptions">
-                        <!-- 选项将由JavaScript动态生成 -->
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button id="confirmDistributorBtn" onclick="confirmDistributor()" disabled>确认</button>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // 手机号验证
-        const phoneInput = document.getElementById('phone');
-        const phoneWrapper = document.getElementById('phoneWrapper');
-        const phoneError = document.getElementById('phoneError');
-
-        phoneInput.addEventListener('input', function(e) {
-            // 只允许输入数字
-            this.value = this.value.replace(/[^\d]/g, '');
-
-            // 验证手机号格式
-            const phoneRegex = /^1[3-9]\d{9}$/;
-            if (this.value && !phoneRegex.test(this.value)) {
-                phoneWrapper.classList.add('error');
-                phoneError.classList.add('show');
-            } else {
-                phoneWrapper.classList.remove('error');
-                phoneError.classList.remove('show');
-            }
-        });
-
         // 用户名验证
         const usernameInput = document.getElementById('username');
         const usernameWrapper = document.getElementById('usernameWrapper');
@@ -891,18 +739,113 @@
             }
         });
 
+        // 邀请码数据(模拟数据)
+        const inviteCodes = [
+            { code: 'D9G23', distributor: '北能公司' },
+            { code: 'K7M45', distributor: '华电能源科技有限公司' },
+            { code: 'P2N89', distributor: '中能储能设备有限公司' },
+            { code: 'T5Q67', distributor: '绿能科技股份有限公司' },
+            { code: 'W8R34', distributor: '星光电力设备有限公司' },
+            { code: 'A1B56', distributor: '东方能源集团' },
+            { code: 'C3D78', distributor: '天诚储能技术有限公司' },
+            { code: 'E6F12', distributor: '新能源发展有限公司' },
+            { code: 'G9H90', distributor: '智慧能源科技公司' },
+            { code: 'J4K23', distributor: '未来动力设备有限公司' }
+        ];
+
+        // 邀请码输入框和下拉列表
+        const inviteCodeInput = document.getElementById('inviteCode');
+        const inviteCodeDropdown = document.getElementById('inviteCodeDropdown');
+        const inviteCodeError = document.getElementById('inviteCodeError');
+        let filteredCodes = [...inviteCodes];
+
+        // 渲染邀请码下拉选项
+        function renderInviteCodeOptions(codes) {
+            inviteCodeDropdown.innerHTML = '';
+
+            if (codes.length === 0) {
+                inviteCodeDropdown.innerHTML = '<div class="invite-code-option" style="text-align:center;color:#999;">暂无匹配的邀请码</div>';
+                return;
+            }
+
+            codes.forEach(item => {
+                const option = document.createElement('div');
+                option.className = 'invite-code-option';
+                option.innerHTML = `<span class="code-text">${item.code}</span>`;
+                option.onclick = function() {
+                    selectInviteCode(item.code);
+                };
+                inviteCodeDropdown.appendChild(option);
+            });
+        }
+
+        // 选择邀请码
+        function selectInviteCode(code) {
+            inviteCodeInput.value = code;
+            inviteCodeDropdown.classList.remove('show');
+
+            // 移除错误状态
+            inviteCodeError.classList.remove('show');
+        }
+
+        // 输入框获得焦点时显示下拉列表
+        inviteCodeInput.addEventListener('focus', function() {
+            const searchTerm = this.value.toUpperCase();
+
+            // 如果有输入内容,进行过滤
+            if (searchTerm) {
+                filteredCodes = inviteCodes.filter(item =>
+                    item.code.toUpperCase().includes(searchTerm) ||
+                    item.distributor.includes(searchTerm)
+                );
+            } else {
+                filteredCodes = [...inviteCodes];
+            }
+
+            renderInviteCodeOptions(filteredCodes);
+            inviteCodeDropdown.classList.add('show');
+        });
+
+        // 输入框输入时进行模糊搜索
+        inviteCodeInput.addEventListener('input', function() {
+            const searchTerm = this.value.toUpperCase();
+
+            if (searchTerm === '') {
+                filteredCodes = [...inviteCodes];
+            } else {
+                // 模糊搜索:邀请码或分销商名称包含搜索词
+                filteredCodes = inviteCodes.filter(item =>
+                    item.code.toUpperCase().includes(searchTerm) ||
+                    item.distributor.includes(searchTerm)
+                );
+            }
+
+            renderInviteCodeOptions(filteredCodes);
+            inviteCodeDropdown.classList.add('show');
+        });
+
+        // 点击其他地方关闭下拉列表
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.invite-code-wrapper')) {
+                inviteCodeDropdown.classList.remove('show');
+            }
+        });
+
         // 发送验证码
         let countdown = 60;
         let timer = null;
 
         function sendVerificationCode() {
-            const phone = phoneInput.value;
-            const phoneRegex = /^1[3-9]\d{9}$/;
+            const emailInput = document.getElementById('email');
+            const emailWrapper = document.getElementById('emailWrapper');
+            const emailError = document.getElementById('emailError');
+            const email = emailInput.value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-            if (!phoneRegex.test(phone)) {
-                phoneWrapper.classList.add('error');
-                phoneError.classList.add('show');
-                phoneInput.focus();
+            if (!emailRegex.test(email)) {
+                emailWrapper.classList.add('error');
+                emailError.classList.add('show');
+                emailInput.focus();
                 return;
             }
 
@@ -912,7 +855,7 @@
 
             // 模拟发送验证码
             setTimeout(() => {
-                showSuccessToast('验证码已发送');
+                showSuccessToast('验证码已发送至邮箱');
                 startCountdown();
             }, 1000);
         }
@@ -933,114 +876,19 @@
             }, 1000);
         }
 
-        // 分销商数据（模拟数据）
-        const distributors = [
-            { code: 'FXS001', name: '北能公司' },
-            { code: 'FXS002', name: '华电能源科技有限公司' },
-            { code: 'FXS003', name: '中能储能设备有限公司' },
-            { code: 'FXS004', name: '绿能科技股份有限公司' },
-            { code: 'FXS005', name: '星光电力设备有限公司' },
-            { code: 'FXS006', name: '东方能源集团' },
-            { code: 'FXS007', name: '天诚储能技术有限公司' },
-            { code: 'FXS008', name: '新能源发展有限公司' },
-            { code: 'FXS009', name: '智慧能源科技公司' },
-            { code: 'FXS010', name: '未来动力设备有限公司' }
-        ];
-
-        let selectedDistributor = null;
-        let allDistributors = [...distributors];
-
-        // 表单提交 - 直接打开分销商选择弹框
+        // 表单提交 - 直接跳转登录页
         const registerForm = document.getElementById('registerForm');
         registerForm.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // 直接显示分销商选择弹框
-            openDistributorModal();
-        });
-
-        // 打开分销商选择弹框
-        function openDistributorModal() {
-            const modal = document.getElementById('distributorModal');
-            modal.classList.add('show');
-            document.body.style.overflow = 'hidden';
-
-            // 初始化分销商列表
-            renderDistributorOptions(allDistributors);
-        }
-
-        // 渲染分销商选项
-        function renderDistributorOptions(list) {
-            const optionsContainer = document.getElementById('distributorOptions');
-            optionsContainer.innerHTML = '';
-
-            if (list.length === 0) {
-                optionsContainer.innerHTML = '<div class="select-option" style="text-align:center;color:#999;">暂无匹配的分销商</div>';
-                return;
-            }
-
-            list.forEach(distributor => {
-                const option = document.createElement('div');
-                option.className = 'select-option';
-                option.innerHTML = `<span class="select-option-code">${distributor.code}</span>${distributor.name}`;
-                option.onclick = function() {
-                    selectDistributor(distributor);
-                };
-                optionsContainer.appendChild(option);
-            });
-        }
-
-        // 选择分销商
-        function selectDistributor(distributor) {
-            selectedDistributor = distributor;
-
-            const selectElement = document.getElementById('distributorSelect');
-            const selectText = document.getElementById('distributorSelectText');
-
-            selectElement.classList.remove('placeholder');
-            selectText.textContent = `${distributor.code} ${distributor.name}`;
-
-            // 更新选中状态
-            const options = document.querySelectorAll('.select-option');
-            options.forEach(opt => opt.classList.remove('selected'));
-            event.target.classList.add('selected');
-
-            // 启用确认按钮
-            document.getElementById('confirmDistributorBtn').disabled = false;
-
-            // 关闭下拉列表
-            document.getElementById('distributorOptions').classList.remove('show');
-            document.getElementById('distributorSelect').classList.remove('open');
-        }
-
-        // 切换下拉列表显示
-        function toggleDistributorOptions() {
-            const options = document.getElementById('distributorOptions');
-            const select = document.getElementById('distributorSelect');
-
-            if (options.classList.contains('show')) {
-                options.classList.remove('show');
-                select.classList.remove('open');
-            } else {
-                options.classList.add('show');
-                select.classList.add('open');
-            }
-        }
-
-        // 确认选择分销商并直接跳转登录页
-        function confirmDistributor() {
-            if (!selectedDistributor) {
-                return;
-            }
-
             // 显示成功提示
-            showSuccessToast(`已选择分销商: ${selectedDistributor.code} ${selectedDistributor.name}`);
+            showSuccessToast('注册成功');
 
             // 直接跳转到登录页面
             setTimeout(() => {
                 window.location.href = 'login.html';
             }, 800);
-        }
+        });
 
         // 显示成功提示
         function showSuccessToast(message) {
