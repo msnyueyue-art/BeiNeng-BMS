@@ -1139,7 +1139,7 @@
 
                     <div class="form-group">
                         <label class="form-label"><span class="required">*</span>账号</label>
-                        <input type="text" class="form-input" id="add_account" placeholder="请输入账号" required>
+                        <input type="text" class="form-input" id="add_account" placeholder="请输入邮箱作为账号" required>
                     </div>
 
                     <div class="form-group">
@@ -1162,13 +1162,9 @@
                                     <input type="checkbox" id="add_role_operator" onchange="event.stopPropagation()">
                                     <label>运维人员</label>
                                 </div>
-                                <div class="multi-select-option" onclick="selectRole('add', '操作员')">
-                                    <input type="checkbox" id="add_role_user" onchange="event.stopPropagation()">
-                                    <label>操作员</label>
-                                </div>
-                                <div class="multi-select-option" onclick="selectRole('add', '访客')">
-                                    <input type="checkbox" id="add_role_guest" onchange="event.stopPropagation()">
-                                    <label>访客</label>
+                                <div class="multi-select-option" onclick="selectRole('add', '分销商')">
+                                    <input type="checkbox" id="add_role_distributor" onchange="event.stopPropagation()">
+                                    <label>分销商</label>
                                 </div>
                             </div>
                         </div>
@@ -1208,7 +1204,7 @@
 
                     <div class="form-group">
                         <label class="form-label"><span class="required">*</span>账号</label>
-                        <input type="text" class="form-input" id="edit_account" placeholder="请输入账号" required>
+                        <input type="text" class="form-input" id="edit_account" placeholder="请输入邮箱作为账号" required>
                     </div>
 
                     <div class="form-group">
@@ -1231,13 +1227,9 @@
                                     <input type="checkbox" id="edit_role_operator" onchange="event.stopPropagation()">
                                     <label>运维人员</label>
                                 </div>
-                                <div class="multi-select-option" onclick="selectRole('edit', '操作员')">
-                                    <input type="checkbox" id="edit_role_user" onchange="event.stopPropagation()">
-                                    <label>操作员</label>
-                                </div>
-                                <div class="multi-select-option" onclick="selectRole('edit', '访客')">
-                                    <input type="checkbox" id="edit_role_guest" onchange="event.stopPropagation()">
-                                    <label>访客</label>
+                                <div class="multi-select-option" onclick="selectRole('edit', '分销商')">
+                                    <input type="checkbox" id="edit_role_distributor" onchange="event.stopPropagation()">
+                                    <label>分销商</label>
                                 </div>
                             </div>
                         </div>
@@ -1294,8 +1286,7 @@
         const roleCheckboxMap = {
             '超级管理员': { add: 'add_role_admin', edit: 'edit_role_admin' },
             '运维人员': { add: 'add_role_operator', edit: 'edit_role_operator' },
-            '操作员': { add: 'add_role_user', edit: 'edit_role_user' },
-            '访客': { add: 'add_role_guest', edit: 'edit_role_guest' }
+            '分销商': { add: 'add_role_distributor', edit: 'edit_role_distributor' }
         };
 
         // 模拟数据
@@ -1303,7 +1294,7 @@
             {
                 id: 1,
                 nickname: '张三',
-                account: 'zhangsan',
+                account: 'zhangsan@163.com',
                 avatar: '张',
                 roles: ['超级管理员'],
                 sites: ['北京站点', '上海站点', '深圳站点'],
@@ -1313,7 +1304,7 @@
             {
                 id: 2,
                 nickname: '李四',
-                account: 'lisi',
+                account: 'lisi@163.com',
                 avatar: '李',
                 roles: ['运维人员'],
                 sites: ['北京站点', '上海站点'],
@@ -1322,63 +1313,13 @@
             },
             {
                 id: 3,
-                nickname: '王五',
-                account: 'wangwu',
-                avatar: '王',
-                roles: ['运维人员'],
+                nickname: '深圳智慧能源科技公司',
+                account: 'shenzhen_energy@163.com',
+                avatar: '深',
+                roles: ['分销商'],
                 sites: ['深圳站点'],
                 status: 'active',
                 createTime: '2024-02-20 10:15:00'
-            },
-            {
-                id: 4,
-                nickname: '赵六',
-                account: 'zhaoliu',
-                avatar: '赵',
-                roles: ['操作员'],
-                sites: ['北京站点'],
-                status: 'active',
-                createTime: '2024-03-05 11:20:00'
-            },
-            {
-                id: 5,
-                nickname: '孙七',
-                account: 'sunqi',
-                avatar: '孙',
-                roles: ['操作员'],
-                sites: ['上海站点'],
-                status: 'active',
-                createTime: '2024-03-12 16:45:00'
-            },
-            {
-                id: 6,
-                nickname: '周八',
-                account: 'zhouba',
-                avatar: '周',
-                roles: ['访客'],
-                sites: ['深圳站点'],
-                status: 'active',
-                createTime: '2024-04-01 08:30:00'
-            },
-            {
-                id: 7,
-                nickname: '吴九',
-                account: 'wujiu',
-                avatar: '吴',
-                roles: ['数据分析员'],
-                sites: ['北京站点', '上海站点', '深圳站点'],
-                status: 'active',
-                createTime: '2024-04-10 13:00:00'
-            },
-            {
-                id: 8,
-                nickname: '郑十',
-                account: 'zhengshi',
-                avatar: '郑',
-                roles: ['操作员'],
-                sites: ['北京站点'],
-                status: 'inactive',
-                createTime: '2024-05-05 10:00:00'
             }
         ];
 
