@@ -815,8 +815,20 @@
         form.addEventListener('submit', function(e) {
             e.preventDefault();
 
-            // 直接跳转到用户管理列表页，无需任何验证
-            window.location.href = 'user-management.html';
+            // 模拟登录验证
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username && password) {
+                // 显示加载状态
+                const submitBtn = document.getElementById('submitBtn');
+                submitBtn.classList.add('loading');
+
+                // 模拟登录延迟后跳转
+                setTimeout(() => {
+                    window.location.href = 'user-management.html';
+                }, 800);
+            }
         });
 
         // ===== 输入框动画增强 =====
